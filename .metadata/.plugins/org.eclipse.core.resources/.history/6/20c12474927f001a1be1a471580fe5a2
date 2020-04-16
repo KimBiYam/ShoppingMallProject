@@ -1,0 +1,8 @@
+package com.myshop.security;
+
+import org.springframework.security.core.userdetails.User;
+
+public class CustomUser extends User {
+	
+
+}

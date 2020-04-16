@@ -1,0 +1,15 @@
+package com.myshop.service;
+
+import com.myshop.domain.UserVO;
+
+public interface UserService {
+//	회원가입
+//	회원수정
+//	회원탈퇴
+//	아이디 중복 체크
+	public void userJoin(UserVO user);
+	public void userUpdate(UserVO user);
+	public void userDelete(String userid);
+	
+
+}

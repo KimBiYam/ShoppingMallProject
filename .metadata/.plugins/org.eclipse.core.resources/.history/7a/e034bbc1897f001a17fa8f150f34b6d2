@@ -1,0 +1,7 @@
+package com.myshop.service;
+
+import com.myshop.domain.UserVO;
+
+public class UserServiceImpl implements UserService {
+
+}

@@ -1,0 +1,16 @@
+package com.myshop.security;
+
+import org.springframework.security.core.userdetails.User;
+
+import com.myshop.domain.UserVO;
+
+import lombok.Getter;
+
+@Getter
+public class CustomUser extends User {
+	private static final long serialVersionUID = 1L;
+	private UserVO user;
+	
+		
+
+}

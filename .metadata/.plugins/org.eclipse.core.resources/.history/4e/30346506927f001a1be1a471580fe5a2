@@ -1,0 +1,14 @@
+package com.myshop.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import com.myshop.mapper.UserMapper;
+
+public class CustomUserDetailsService implements UserDetailsService {
+	@Autowired
+	private UserMapper userMapper;
+	
+	
+	
+}

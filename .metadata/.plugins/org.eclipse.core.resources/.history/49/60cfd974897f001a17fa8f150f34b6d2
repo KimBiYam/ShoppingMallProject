@@ -1,0 +1,9 @@
+package com.myshop.service;
+
+public interface UserService {
+//	회원가입
+//	회원수정
+//	회원탈퇴
+//	아이디 중복 체크
+
+}

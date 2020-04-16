@@ -68,4 +68,11 @@
 		<item value="org.springframework.ide.eclipse.webflow.feature:3.9.11.201912160804-RELEASE"/>
 		<item value="org.springframework.ide.eclipse.xml.namespaces.feature:3.9.12.202001201914-CI-B2372"/>
 	</list>
+	<section name="CleanDialogSettings">
+		<item key="DIALOG_X_ORIGIN" value="710"/>
+		<item key="DIALOG_Y_ORIGIN" value="261"/>
+		<item key="DIALOG_WIDTH" value="500"/>
+		<item key="DIALOG_HEIGHT" value="389"/>
+		<item key="TOGGLE_SELECTED" value="false"/>
+	</section>
 </section>

@@ -1,0 +1,11 @@
+package com.myshop.mapper;
+
+public interface UserMapper {
+//	회원가입
+//	회원리스트
+//	회원정보
+//	회원수정
+//	회원탈퇴
+//	아이디 중복 체크
+
+}

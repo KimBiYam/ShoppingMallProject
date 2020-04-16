@@ -9,7 +9,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
-	<title>Shop Homepage - Start Bootstrap Template</title>
+	<title>My Shop</title>
 </head>
 
 <body>

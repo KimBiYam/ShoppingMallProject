@@ -1,3 +1,4 @@
+Preferences.MainPage.overwriteBuildFilesOnExport=prompt
 eclipse.preferences.version=1
 editor.color.default=216,216,216
 editor.color.externalized_string=255,198,0
