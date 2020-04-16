@@ -6,7 +6,6 @@
 <fullyQualifiedTypeName name="oracle.jdbc.proxy.annotation.SetDelegate"/>
 <fullyQualifiedTypeName name="lombok.Setter"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.AutomapConstructor"/>
-<fullyQualifiedTypeName name="lombok.Data"/>
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PostMapping"/>
 <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
@@ -21,7 +20,6 @@
 <fullyQualifiedTypeName name="org.springframework.security.core.authority.SimpleGrantedAuthority"/>
 <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
 <fullyQualifiedTypeName name="com.myshop.domain.UserVO"/>
-<fullyQualifiedTypeName name="com.myshop.security.CustomUser"/>
 <fullyQualifiedTypeName name="org.springframework.security.crypto.password.PasswordEncoder"/>
 <fullyQualifiedTypeName name="org.springframework.stereotype.Service"/>
 <fullyQualifiedTypeName name="org.springframework.security.web.access.AccessDeniedHandler"/>
@@ -29,4 +27,8 @@
 <fullyQualifiedTypeName name="com.myshop.service.UserService"/>
 <fullyQualifiedTypeName name="com.myshop.mapper.UserMapper"/>
 <fullyQualifiedTypeName name="org.apache.ibatis.annotations.Mapper"/>
+<fullyQualifiedTypeName name="org.springframework.security.web.authentication.AuthenticationFailureHandler"/>
+<fullyQualifiedTypeName name="lombok.Data"/>
+<fullyQualifiedTypeName name="com.myshop.security.CustomUserDetailsService"/>
+<fullyQualifiedTypeName name="com.myshop.security.CustomUser"/>
 </qualifiedTypeNameHistroy>

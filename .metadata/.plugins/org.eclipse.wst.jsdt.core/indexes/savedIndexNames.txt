@@ -1,8 +1,6 @@
-INDEX VERSION 1.4+C:\Users\admin\Desktop\Ã¢Çö\ShoppingMallProject\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-2302955487.index
-2684647565.index
-3058530469.index
+INDEX VERSION 1.4+E:\Hot\ShoppingMallProject\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3473432167.index
 318896945.index
-972409554.index
-1164026798.index
-1965096319.index
+1392475879.index
+2687456481.index
+292740453.index

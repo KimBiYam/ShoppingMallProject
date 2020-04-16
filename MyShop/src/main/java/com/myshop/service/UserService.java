@@ -19,3 +19,4 @@ public interface UserService {
 	public void userDelete(String userid);
 	public String userIdCheck(String userid);
 }
+	
