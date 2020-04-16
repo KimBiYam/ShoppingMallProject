@@ -21,9 +21,9 @@ public class UserController {
 	@PostMapping("/join")
 	public String userJoin(UserVO user, AuthVO auth, String admincode) {
 		if (admincode.equals("1234")) {
-			auth.setAuth("ROLE_ADMIN");
+			auth.setUserauth("ROLE_ADMIN");
 		} else {
-			auth.setAuth("ROLE_USER");
+			auth.setUserauth("ROLE_USER");
 		}
 
 		service.userJoin(user, auth);

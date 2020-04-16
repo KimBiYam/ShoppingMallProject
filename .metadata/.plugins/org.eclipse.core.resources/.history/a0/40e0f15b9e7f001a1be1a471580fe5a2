@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.mapper.UserMapper">
+
+	<resultMap type="com.myshop.domain.userVO" id="userMap">
+		<id property="userid" column="userid" />
+		<result property="userid" column="userid" />
+		<result property="userpw" column="userpw" />
+		<result property="username" column="username" />
+		<result property="addr" column="addr" />
+		<result property="zipNo" column="zipNo" />
+		<result property="regDate" column="regdate" />
+		<collection property="authList" resultMap="authMap">
+		</collection>
+	</resultMap>
+
+<insert id="userJoin">
+	insert into myshop_user values
+	(#{userid},#{userpw},#{username},#{tel},#{email},#{zipcode},#{addr},sysdate)
+</insert>
+<insert id="userAuth">
+	insert into myshop_user_auth values
+	(#{userid},#{auth})
+</insert>
+
+<select id="userGet" resultMap="">
+	select *
+	from
+ 	myshop_user user LEFT OUTER JOIN myshop_user_auth auth on user.user_id 
+ 	where user_id = #{userid}
+</select>
+
+<select id="userIdCheck" resultType="String">
+	select user_id from myshop_user
+	where user_id = #{userid}
+</select>
+
+</mapper>

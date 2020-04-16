@@ -1,8 +1,8 @@
 //회원가입 폼
-function register() {
+function join() {
 	$(".joinInput").val("");
 	$("#joinModal").modal("show");
-	$("#registerid").removeAttr("readonly");
+	$("#joinid").removeAttr("readonly");
 	$("#idcheck").val("0");
 }
 //로그인 폼
@@ -11,18 +11,41 @@ function login() {
 	$("#loginpw").val("");
 	$("#loginModal").modal("show");
 }
+//로그아웃 버튼
+function logout(){
+	alert("로그아웃 되었습니다");
+	$("#logoutForm").submit();	
+}
 
 $(function() {
+//	이메일 정규식
+var regemail=/^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{1,5}$/;
+//	아이디 한글 입력 방지
+	$("#joinid").on("blur keyup",function(){
+		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,''));
+	})
+	$("#loginid").on("blur keyup",function(){
+		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,''));
+	})
+//	전화번호 숫자만 입력
+	$("#tel").on("blur keyup",function(){
+		$(this).val($(this).val().replace(/[^0-9]/gi,''));
+	})	
+//	이름 한글만 입력
+	$("#username").on("blur keyup",function(){
+		$(this).val($(this).val().replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g,''));
+	})
+	
 	// 회원가입
-	$("#registerBtn").on("click", function() {
-		if ($("#registerid").val() == "") {
+	$("#joinBtn").on("click", function() {
+		if ($("#joinnid").val() == "") {
 			alert("아이디를 입력하세요");
-			$("#registerid").focus();
+			$("#joinnid").focus();
 			return false;
 		}
-		if ($("#registerpw").val() == "") {
+		if ($("#joinpw").val() == "") {
 			alert("패스워드를 입력하세요");
-			$("#registerpw").focus();
+			$("#joinpw").focus();
 			return false;
 		}
 		if ($("#pwdcheck").val() == "") {
@@ -30,9 +53,9 @@ $(function() {
 			$("#pwdcheck").focus();
 			return false;
 		}
-		if ($("#registername").val() == "") {
+		if ($("#username").val() == "") {
 			alert("이름을 입력하세요");
-			$("#registername").focus();
+			$("#username").focus();
 			return false;
 		}
 		if ($("#tel").val() == "") {
@@ -54,47 +77,53 @@ $(function() {
 			$("#addrDetail").focus();
 			return false;
 		}
+		
 		if ($("#idcheck").val() == "0") {
 			alert("아이디 중복체크를 하세요");
 			return false;
 		}
-		if ($("#registerpw").val() != $("#pwdcheck").val()) {
+		if ($("#joinpw").val() != $("#pwdcheck").val()) {
 			alert("패스워드가 틀렸습니다");
-			$("#registerpw").val("");
+			$("#joinpw").val("");
 			$("#pwdcheck").val("");
-			$("#registerpw").focus();
+			$("#joinpw").focus();
+			return false;
+		}
+		if(!regemail.exec($("#email").val())){
+			alert("이메일 양식이 틀렸습니다");
+			$("#email").val("");
 			return false;
 		}
 		var addr = $("#addrView").val() + " " + $("#addrDetail").val();
 		$("#addr").val(addr);
 
-		$("#registerForm").submit();
+		$("#joinForm").submit();
 		alert("회원가입이 완료 되었습니다!");
 	});
 
 	$("#idcheckBtn").click(function() {
-		if ($("#registerid").val() == "") {
+		if ($("#joinid").val() == "") {
 			alert("ID를 입력해주세요");
 			$("#registerid").focus();
 			return false;
 		}
 		if ($("#idcheck").val() == "1") {
-			$("#registerid").removeAttr("readonly");
-			$("#registerid").val("");
+			$("#joinid").removeAttr("readonly");
+			$("#joinid").val("");
 			$("#idcheck").val("0");
 			return false;
 		}
 		$.get("/myshop/user/idcheck", {
-			"userid" : $("#registerid").val()
+			"userid" : $("#joinid").val()
 		}, function(data) {
 			if (data == "no"){
 				alert("이미 가입된 아이디 입니다");
-				$("#registerid").val("");
-				$("#registerid").focus();
+				$("#joinid").val("");
+				$("#joinid").focus();
 			}
 			if (data == "yes") {
 				alert("사용 가능한 아이디 입니다");
-				$("#registerid").attr("readonly", "readonly");
+				$("#joinid").attr("readonly", "readonly");
 				$("#idcheck").val("1");				
 			}
 			

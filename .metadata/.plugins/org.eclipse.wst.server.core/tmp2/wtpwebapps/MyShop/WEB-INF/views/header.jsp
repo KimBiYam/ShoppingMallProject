@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 	<!-- Bootstrap core CSS -->
 	<link href="/myshop/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +31,7 @@
           </li>
           <sec:authorize access="isAnonymous()">
           <li class="nav-item">
-            <a class="nav-link" href="javascript:register()">회원가입</a>
+            <a class="nav-link" href="javascript:join()">회원가입</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="javascript:login()">로그인</a>
@@ -38,9 +39,13 @@
           </sec:authorize>
           <sec:authorize access="isAuthenticated()">
           <li class="nav-item">
-          <form action="/myshop/logout" method="post">         
-            <a class="nav-link" href="#">로그아웃</a>
-           </form>
+            <a class="nav-link" href="#">마이페이지</a>
+          </li>          
+          <li class="nav-item">          
+          <form id="logoutForm" action="/myshop/logout" method="post">
+          <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+          </form>
+            <a class="nav-link" href="javascript:logout()">로그아웃</a>
           </li>
           </sec:authorize>
         </ul>
@@ -56,20 +61,20 @@
 				<h3 class="modal-title" id="myModalLabel">회원가입</h3>
 			</div>
 			<div class="modal-body">
-	            <form id="registerForm" action="/myshop/user/join" method="post">
+	            <form id="joinForm" action="/myshop/user/join" method="post">
 	            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 	            <input type="hidden" name="addr" id="addr">
 	            <input type="hidden" name="idcheck" id="idcheck" value="0">
 	                <div class="form-group">
-	              	  <label class="small mb-1" for="registerid">ID</label>
+	              	  <label class="small mb-1" for="joinid">ID</label>
 					  <div class="input-group">
-	              	  	<input class="form-control input-group-prepend joinInput" name="userid" id="registerid" type="text" placeholder="아이디를 입력하세요" />
+	              	  	<input class="form-control input-group-prepend joinInput" name="userid" id="joinid" type="text" placeholder="아이디를 입력하세요" />
 	               	 	<button type="button" id="idcheckBtn" class="btn btn-outline-info input-group-append">중복체크</button>
 		              </div>
 	                </div>
 	                <div class="form-group">
-		                <label class="small mb-1" for="registerpw">Password</label>
-		                <input class="form-control joinInput" name="userpw" id="registerpw" type="password" placeholder="패스워드를 입력하세요" />
+		                <label class="small mb-1" for="joinpw">Password</label>
+		                <input class="form-control joinInput" name="userpw" id="joinpw" type="password" placeholder="패스워드를 입력하세요" />
 	                </div>
 	                <div class="form-group">
 		                <label class="small mb-1" for="userpw">Password 확인</label>
@@ -77,11 +82,11 @@
 	                </div>
    	                <div class="form-group">
 		                <label class="small mb-1" for="username">이름</label>
-		                <input class="form-control joinInput" name="username" id="registername" type="text" placeholder="이름을 입력하세요" />
+		                <input class="form-control joinInput" name="username" id="username" type="text" placeholder="이름을 입력하세요" />
 	                </div>
 	                <div class="form-group">
 		                <label class="small mb-1" for="tel">전화번호</label>
-		                <input class="form-control joinInput" name="tel" id="tel" type="tel" placeholder="전화번호를 입력하세요" />
+		                <input class="form-control joinInput" name="tel" id="tel" type="tel" maxlength="13" placeholder="전화번호를 입력하세요" />
 	                </div>
   	                <div class="form-group">
 		                <label class="small mb-1" for="email">이메일</label>
@@ -107,7 +112,7 @@
 		                <input class="form-control joinInput" name="admincode" id="admincode" type="text" placeholder="관리자가 되려면 코드를 입력하세요" />
 	                </div>
 	                <div class="form-group mt-4 mb-0">
-	                	<button type="button" class="btn btn-primary float-right" id="registerBtn">회원가입</button>
+	                	<button type="button" class="btn btn-primary float-right" id="joinBtn">회원가입</button>
 	                </div>
 	            </form>
 			</div>
@@ -116,7 +121,7 @@
 	</div>
 	<!-- /.modal-dialog -->
 </div>
-<!-- /#registerModal --> 
+<!-- /#joinModal --> 
 <!-- #loginModal -->
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -148,6 +153,12 @@
 	                <div class="form-group mt-4 mb-0">
 	                	<button type="button" class="btn btn-primary float-right" id="loginBtn">로그인</button>
 	                </div>
+	                <c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+					    <font color="red">
+					        ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
+					        <c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+					    </font>
+					</c:if>				
 	            </form>
 			</div>
 		</div>

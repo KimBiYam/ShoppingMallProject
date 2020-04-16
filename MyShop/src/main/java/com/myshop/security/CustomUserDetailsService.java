@@ -10,15 +10,15 @@ import com.myshop.mapper.UserMapper;
 
 public class CustomUserDetailsService implements UserDetailsService {
 	@Autowired
-	private UserMapper userMapper;
+	private UserMapper mapper;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
-		System.out.println("username:" + username);
-		UserVO user = userMapper.userGet(username);
-		System.out.println(user.getUserid());
-		System.out.println(user.getUserpw());
+//		System.out.println("username:" + username);
+		UserVO user = mapper.userGet(username);
+//		System.out.println("userid:" + user.getUserid());
+//		System.out.println("userpw:" + user.getUserpw());
 
 		return user == null ? null : new CustomUser(user);
 	}
