@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<jsp:include page="header.jsp"/>
+<jsp:include page="includes/header.jsp"/>
   <!-- Page Content -->
   <div class="container">
 
@@ -169,7 +169,7 @@
 
   </div>
   <!-- /.container -->
-  <jsp:include page="footer.jsp"></jsp:include>
+  <jsp:include page="includes/footer.jsp"></jsp:include>
 
 
 </body>

@@ -1,0 +1,15 @@
+package com.myshop.mapper;
+
+import com.myshop.domain.BoardVO;
+
+public interface BoardMapper {
+//	글쓰기
+//	상세보기
+//	수정
+//	삭제
+	public void boardInsert(BoardVO board);
+	public BoardVO boardGet(Long bnum);
+	public void boardUpdate(BoardVO board);
+	public void boardDelete(Long bnum);
+
+}
