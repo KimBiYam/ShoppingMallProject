@@ -10,6 +10,9 @@ public interface BoardMapper {
 //	상세보기
 //	수정
 //	삭제
+//	조회수
+//	글 갯수
+//	회원 탈퇴 시 글 삭제
 	public void boardInsert(BoardVO board);
 	public List<BoardVO> boardList(int type);
 	public BoardVO boardGet(Long bnum);
@@ -17,4 +20,5 @@ public interface BoardMapper {
 	public void boardDelete(Long bnum);
 	public void viewcnt(Long bnum);
 	public void getcount(int type);
+	public void userDelete(String userid);
 }

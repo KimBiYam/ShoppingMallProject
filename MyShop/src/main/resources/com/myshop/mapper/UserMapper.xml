@@ -28,16 +28,34 @@
 		insert into myshop_user_auth values
 		(#{userid},#{userauth})
 	</insert>
-
+	<select id="userList" resultMap="userMap">
+		select
+		myuser.user_id,user_pw,user_name,user_tel,user_email,user_zipcode,user_addr,user_joined,user_auth
+		FROM
+		myshop_user myuser LEFT OUTER JOIN myshop_user_auth auth on myuser.user_id = auth.user_id
+		where user_auth = 'ROLE_USER'
+	</select>
 	<select id="userGet" resultMap="userMap">
 		select
 		myuser.user_id,user_pw,user_name,user_tel,user_email,user_zipcode,user_addr,user_joined,user_auth
 		FROM
-		myshop_user myuser LEFT OUTER JOIN myshop_user_auth auth on myuser.user_id =
-		auth.user_id
+		myshop_user myuser LEFT OUTER JOIN myshop_user_auth auth on myuser.user_id = auth.user_id
 		where myuser.user_id = #{userid}
 	</select>
-
+	<update id="userUpdate">
+		update myshop_user set
+		user_pw=#{userpw},user_tel=#{tel},user_email=#{email},user_zipcode=#{zipcode},
+		user_addr=#{addr}
+		where user_id = #{userid}
+	</update>
+	<delete id="userDelete">
+		delete from myshop_user
+		where user_id = #{userid}
+	</delete>
+		<delete id="authDelete">
+		delete from myshop_user_auth
+		where user_id = #{userid}
+	</delete>
 	<select id="userIdCheck" resultType="String">
 		select user_id from myshop_user
 		where user_id = #{userid}

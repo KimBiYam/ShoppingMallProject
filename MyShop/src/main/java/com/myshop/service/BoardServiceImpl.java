@@ -41,5 +41,15 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		boardMapper.boardDelete(bnum);
 	}
+	@Override
+	public void viewcnt(Long bnum) {
+		// TODO Auto-generated method stub
+		boardMapper.viewcnt(bnum);
+	}
+	@Override
+	public void getcount(int type) {
+		// TODO Auto-generated method stub
+		boardMapper.getcount(type);
+	}
 
 }

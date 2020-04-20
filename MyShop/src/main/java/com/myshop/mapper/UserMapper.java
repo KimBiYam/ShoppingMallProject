@@ -19,6 +19,7 @@ public interface UserMapper {
 	public UserVO userGet(String userid);
 	public void userUpdate(UserVO user);
 	public void userDelete(String userid);
+	public void authDelete(String userid);
 	public String userIdCheck(String userid);
 	
 

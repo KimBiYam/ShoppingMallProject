@@ -1,0 +1,11 @@
+package com.myshop.domain;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
+@Data
+@AllArgsConstructor
+public class Criteria {
+	private int type;
+
+}

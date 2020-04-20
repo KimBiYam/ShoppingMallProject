@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.mapper.BoardMapper">
+<resultMap type="com.myshop.domain.BoardVO" id="baordMap">
+	<result property="bnum" column="board_num"/>
+	<result property="userid" column="user_id"/>
+	<result property="title" column="board_title"/>
+	<result property="content" column="board_content"/>
+	<result property="regdate" column="board_regdate"/>
+	<result property="type" column="board_type"/>
+	<result property="viewcnt" column="view_cnt"/>
+	<result property="commentcnt" column="comment_cnt"/>
+</resultMap>
+	<!-- 글쓰기 -->
+	<insert id="boardInsert">
+		<selectKey keyProperty="bnum" order="BEFORE"
+			resultType="long">
+			select myshop_board_seq.nextval from dual
+		</selectKey>
+		insert into
+		myshop_board(board_num,user_id,board_title,board_content,board_type)
+		values(#{bnum},#{userid},#{title},#{content},#{type})
+	</insert>
+	<!-- 리스트 -->
+	<select id="boardList" resultMap="baordMap">
+		select * from myshop_board
+		where board_type = #{type}
+		order by board_num
+	</select>
+	<!-- 상세보기 -->
+	<select id="boardGet" resultMap="baordMap">
+		select * from myshop_board
+		where board_num = #{bnum}
+	</select>
+	<!-- 수정 -->
+	<update id="boardUpdate">
+		update myshop_board
+		set board_title=#{title}, board_content=#{content}
+		where board_num = #{bnum}
+	</update>
+	<!-- 삭제 -->
+	<delete id="boardDelete">
+		delete from myshop_board
+		where board_num = #{bnum}
+	</delete>
+	<!-- 조회수 -->
+	<update id="viewcnt">
+		update myshop_board
+		set view_cnt = view_cnt+1
+		where board_num = #{bnum}
+	</update>
+	<!-- 카운트 -->
+	<select id="getcount" resultType="int">
+		select count(*)
+		from myshop_board
+		where board_type = #{type}
+	</select>
+	<!-- 회원 탈퇴 시 글 삭제  -->
+	
+
+</mapper>

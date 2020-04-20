@@ -1,0 +1,23 @@
+package com.myshop.domain;
+
+import org.springframework.web.util.UriComponentsBuilder;
+
+import lombok.Data;
+
+@Data
+public class Criteria {
+	private int type;
+	
+	public String getListLink() {
+		
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("pageNum", this.pageNum)
+				.queryParam("amount", this.getAmount())
+				.queryParam("type", this.getType())
+				.queryParam("keyword", this.getKeyword());
+		
+		return builder.toUriString();
+		
+	}
+
+}

@@ -37,7 +37,7 @@
 	<!-- 수정 -->
 	<update id="boardUpdate">
 		update myshop_board
-		set board_title=#{board_title}, board_content=#{board_content}
+		set board_title=#{title}, board_content=#{content}
 		where board_num = #{bnum}
 	</update>
 	<!-- 삭제 -->
@@ -57,5 +57,10 @@
 		from myshop_board
 		where board_type = #{type}
 	</select>
+	<!-- 회원 탈퇴 시 글 삭제  -->
+	<delete id="userDelete">
+		delete from myshop_board
+		where user_id = #{userid}
+	</delete>
 
 </mapper>
