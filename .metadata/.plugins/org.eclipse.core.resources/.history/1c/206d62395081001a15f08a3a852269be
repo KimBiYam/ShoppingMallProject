@@ -1,0 +1,20 @@
+package com.myshop.mapper;
+
+import java.util.List;
+
+import com.myshop.domain.BoardVO;
+
+public interface BoardMapper {
+//	글쓰기
+//	리스트
+//	상세보기
+//	수정
+//	삭제
+	public void boardInsert(BoardVO board);
+	public List<BoardVO> boardList(int board_type);
+	public BoardVO boardGet(Long board_num);
+	public void boardUpdate(BoardVO board);
+	public void boardDelete(Long board_num);
+	public void viewcnt(Long board_num);
+	public void getcount(int board_type);
+}

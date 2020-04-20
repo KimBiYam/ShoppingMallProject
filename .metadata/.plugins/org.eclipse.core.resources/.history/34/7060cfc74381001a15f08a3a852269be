@@ -1,0 +1,6 @@
+package com.myshop.domain;
+
+public class BoardVO {
+	
+
+}

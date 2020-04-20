@@ -1,0 +1,42 @@
+package com.myshop.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.myshop.domain.BoardVO;
+import com.myshop.service.BoardService;
+
+@RequestMapping("/board/*")
+@Controller
+public class BoardController {
+	@Autowired
+	BoardService service;
+
+	@GetMapping("/list")
+	public void list(int type, Model model) {
+		List<BoardVO> list = service.boardList(type);
+		model.addAttribute("type", type);
+		model.addAttribute("list", list);
+	}
+
+	@GetMapping("insert")
+	public void insert(int type, Model model) {
+		model.addAttribute("type", type);
+	}
+
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("insert")
+	public String insert(BoardVO board) {
+		service.boardInsert(board);
+		return "redirect:/board/list/?type=" + board.getBoard_type();
+	}
+	
+}

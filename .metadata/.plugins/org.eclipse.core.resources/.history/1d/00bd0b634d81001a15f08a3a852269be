@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.mapper.BoardMapper">
+<!-- 글쓰기  -->
+<insert id="boardInsert">
+	<selectKey keyProperty="board_num" order="BEFORE" resultType="long">
+		select myshop_board_seq.nextval from dual
+	</selectKey>
+	insert into myshop_board(board_num,user_id,board_title,board_content,board_type)
+	values(#{board_num},#{user_id},#{board_title},#{board_content},#{board_type})	
+</insert>
+<!-- 리스트 -->
+<select id="boardList" resultType="com.myshop.domain.BoardVO">
+	select * from myshop_board
+	where board_type = #{board_type}
+	order by board_num
+</select>
+<!-- 상세보기  -->
+<select id="boardGet" resultType="com.myshop.domain.BoardVO">
+	select * from myshop_board
+	where board_num = #{board_num}
+</select>
+<!-- 수정  -->
+<update id="boardUpdate">
+</update>
+<!-- 삭제  -->
+
+
+<!-- 조회수 -->
+<!-- 카운트  -->
+
+</mapper>

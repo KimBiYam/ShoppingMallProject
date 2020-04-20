@@ -19,8 +19,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		UserVO user = mapper.userGet(username);
 //		System.out.println("userid:" + user.getUserid());
 //		System.out.println("userpw:" + user.getUserpw());
-
-		return user == null ? null : new CustomUser(user);
+        if(user==null) {
+            throw new UsernameNotFoundException(username);
+        }
+		return new CustomUser(user);
 	}
 
 }
