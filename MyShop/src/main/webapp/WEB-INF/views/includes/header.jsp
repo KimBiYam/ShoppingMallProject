@@ -52,7 +52,10 @@
             <a class="nav-link" href="/myshop/admin/list"><i class="far fa-address-book"></i> 회원관리</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-balance-scale"></i> 상품등록</a>
+            <a class="nav-link" href="/myshop/product/category/list"><i class="fas fa-clipboard-list"></i> 카테고리 관리</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="/myshop/product/register"><i class="fas fa-balance-scale"></i> 상품등록</a>
           </li>          
           </sec:authorize>
           <li class="nav-item">          

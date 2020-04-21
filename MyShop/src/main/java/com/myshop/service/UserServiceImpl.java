@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
 		return userMapper.userGet(userid);				
 	}
 
-	@Override
+	@Override	
 	public void userUpdate(UserVO user) {
 		// TODO Auto-generated method stub
 		user.setUserpw(pwencoder.encode(user.getUserpw()));
