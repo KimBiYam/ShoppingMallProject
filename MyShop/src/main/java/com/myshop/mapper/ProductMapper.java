@@ -9,6 +9,8 @@ public interface ProductMapper {
 	public List<String> categorylist();
 	public void categoryDelete(String categoryname);
 	public void productRegister(ProductVO product);
-	public List<ProductVO> ProductList();
-
+	public List<ProductVO> productList(String category);
+	public ProductVO productGet(int id);
+	public void productUpdate(ProductVO product);
+	public void productDelete(int id);
 }

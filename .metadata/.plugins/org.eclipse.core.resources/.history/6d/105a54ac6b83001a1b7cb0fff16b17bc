@@ -1,0 +1,8 @@
+package com.myshop.mapper;
+
+import com.myshop.domain.CategoryVO;
+
+public interface ProductMapper {
+	public void categoryRegister(String categoryname);
+
+}

@@ -1,0 +1,12 @@
+package com.myshop.domain;
+
+import lombok.Data;
+
+@Data
+public class ProductVO {
+	private Long id;
+	private String name
+	
+	
+
+}

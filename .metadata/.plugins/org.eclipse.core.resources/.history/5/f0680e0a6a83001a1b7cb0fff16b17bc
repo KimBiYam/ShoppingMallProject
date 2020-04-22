@@ -1,0 +1,15 @@
+package com.myshop.domain;
+
+import lombok.Data;
+
+@Data
+public class ProductVO {
+	private intid;
+	private String name;
+	private int price;
+	private int stock;
+	private String src;
+	private String categoryName;
+	private int onsale;
+
+}

@@ -1,0 +1,7 @@
+package com.myshop.mapper;
+
+
+public interface ProductMapper {
+	public void categoryRegister(String categoryName);
+
+}

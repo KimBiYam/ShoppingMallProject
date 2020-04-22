@@ -27,11 +27,19 @@ public class ProductController {
 	String uploadPath;
 
 	@GetMapping("/home")
-	public void home(Model model) {
+	public void home(String category, Model model) {
 		List<String> categorys = service.categorylist();
-		List<ProductVO> products = service.ProductList();
+		List<ProductVO> products = service.productList(category);
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("products", products);
+	}
+
+	@GetMapping("/get")
+	public void get(int id, Model model) {
+		List<String> categorys = service.categorylist();
+		ProductVO product = service.productGet(id);
+		model.addAttribute("categorys", categorys);
+		model.addAttribute("product", product);
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -69,7 +77,7 @@ public class ProductController {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/register")
-	public String productRegister(ProductVO product, Model model) throws Exception {
+	public String productRegister(ProductVO product) throws Exception {
 		// 파일 경로와 파일명 설정
 		UUID uuid = UUID.randomUUID();
 		String savedName = uuid.toString() + product.getFile().getOriginalFilename();
@@ -79,10 +87,62 @@ public class ProductController {
 
 		// 파일 경로 설정
 		product.setSrc("/myshop/resources/img/" + savedName);
+		// 파일명 설정
+		product.setImgname(savedName);
 
 		service.productRegister(product);
 		return "redirect:/";
+	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/update")
+	public void productUpdate(int id, Model model) {
+		List<String> categorys = service.categorylist();
+		ProductVO product = service.productGet(id);
+		model.addAttribute("product", product);
+		model.addAttribute("categorys", categorys);
+	}
+
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/update")
+	public String productUpdate(ProductVO product, String imgModify) throws Exception {
+
+		if (imgModify.equals("1")) {
+			UUID uuid = UUID.randomUUID();
+			String savedName = uuid.toString() + product.getFile().getOriginalFilename();
+			File target = new File(uploadPath, savedName);
+
+			FileCopyUtils.copy(product.getFile().getBytes(), target);
+
+			product.setSrc("/myshop/resources/img/" + savedName);
+//		System.out.println(product.getSrc());
+//		System.out.println(product.getFile());
+		}
+
+		service.productUpdate(product);
+		return "redirect:/";
+	}
+
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/delete")
+	public String productDelete(int id) {
+		
+		ProductVO product = service.productGet(id);
+		
+		File file = new File(uploadPath + "/" + product.getImgname());
+
+		// 경로에서 이미지 파일 삭제
+		if (file.exists()) {
+			if (file.delete()) {
+				System.out.println("파일삭제 성공");
+			} else {
+				System.out.println("파일삭제 실패");
+			}
+		}
+
+		service.productDelete(id);
+
+		return "redirect:/";
 	}
 
 }

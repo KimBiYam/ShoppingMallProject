@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <!-- Page Content -->
+  <div class="container my-5">
+    <div class="row">
+      <div class="col-lg-3">
+        <h1 class="my-4">My Shop</h1>
+        <div class="list-group">
+        	<a href="#" class="list-group-item">전체보기 </a>	
+        <c:forEach items="${categorys }" var="categorys">
+        	<a href="/myshop/home/categoryname=${categorys }" class="list-group-item">${categorys } </a>
+        </c:forEach>
+        </div>
+      </div>
+      <!-- /.col-lg-3 -->

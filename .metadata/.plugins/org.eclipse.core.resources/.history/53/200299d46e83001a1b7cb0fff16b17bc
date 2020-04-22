@@ -1,0 +1,9 @@
+package com.myshop.mapper;
+
+import java.util.List;
+
+public interface ProductMapper {
+	public void categoryRegister(String categoryname);
+	public List<String> categorylist();
+
+}
