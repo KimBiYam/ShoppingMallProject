@@ -1,5 +1,0 @@
-package com.myshop.mapper;
-
-public interface MemberMapper {
-
-}
