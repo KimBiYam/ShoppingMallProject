@@ -1,0 +1,12 @@
+package com.myshop.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.myshop.domain.CartVO;
+
+public interface CartMapper {
+
+
+}

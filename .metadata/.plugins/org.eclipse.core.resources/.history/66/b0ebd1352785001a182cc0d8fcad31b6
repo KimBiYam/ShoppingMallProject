@@ -1,0 +1,55 @@
+package com.myshop.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.myshop.domain.CartVO;
+import com.myshop.mapper.CartMapper;
+
+@Service
+public class CartServiceImpl implements CartService {
+	@Autowired
+	private CartMapper mapper;
+	
+
+	@Override
+	public void cartAdd(CartVO cart) {
+		// TODO Auto-generated method stub
+		mapper.cartAdd(cart);
+	}
+
+	@Override
+	public CartVO cartGet(int cartid) {
+		// TODO Auto-generated method stub
+		return mapper.cartGet(cartid);
+	}
+
+	@Override
+	public List<CartVO> cartList(String userid) {
+		// TODO Auto-generated method stub
+		return mapper.cartList(userid);
+	}
+
+	@Override
+	public void cartDelete(int cartid) {
+		// TODO Auto-generated method stub
+		mapper.cartDelete(cartid);
+		
+	}
+
+	@Override
+	public void cartDeleteById(String userid) {
+		// TODO Auto-generated method stub
+		mapper.cartDeleteById(userid);
+	}
+
+	@Override
+	public void cartAmount(int cartid, int amount) {
+		// TODO Auto-generated method stub
+		mapper.cartAmount(cartid, amount);
+	}
+	
+
+}

@@ -1,0 +1,15 @@
+package com.myshop.mapper;
+
+import java.util.List;
+
+import com.myshop.domain.ProductVO;
+
+public interface ProductMapper {
+	public void categoryRegister(String categoryname);
+	public List<String> categorylist();
+	public void categoryDelete(String categoryname);
+	public void productRegister(ProductVO product);
+	public List<ProductVO> productList(String categoryname);
+	public ProductVO productGet(int id);
+
+}

@@ -1,0 +1,24 @@
+package com.myshop.domain;
+
+import lombok.Data;
+
+@Data
+public class OrderVO {
+	private String orderid;
+	private String userid;
+	private String addr;
+	private String tel;
+	private int approval;
+	private String productname;
+	private int productprice;
+	private String src;
+	private int amount;
+	private String ordercode;
+
+	public OrderVO(CartVO cart) {
+		this.productname = cart.getProductname();
+		this.productprice = cart.getProductprice();
+		this.src = cart.getSrc();
+		this.amount=cart.getAmount();
+	}
+}

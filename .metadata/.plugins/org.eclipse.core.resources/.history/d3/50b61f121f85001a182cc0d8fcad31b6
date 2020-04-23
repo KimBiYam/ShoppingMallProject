@@ -1,0 +1,76 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<title>마이페이지</title>
+</head>
+
+
+<body>
+<jsp:include page="../includes/header.jsp"/>
+<jsp:include page="../includes/usersidebar.jsp" />
+      <div class="col-lg-9">
+            <h1 class="my-5 text-center">회원 정보 수정</h1>
+      <form id="updateForm" action="/myshop/user/update" method="post">
+	            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	            <input type="hidden" name="userid" id="userid" value="${user.userid }">
+	            <input type="hidden" name="addr" id="updateAddr" value="${user.addr }">
+	                <div class="form-group">
+		                <label class="small mb-1" for="updatePw">Password</label>
+		                <input class="form-control joinInput" name="userpw" id="updatePw" type="password" placeholder="패스워드를 입력하세요" />
+	                </div>
+	                <div class="form-group">
+		                <label class="small mb-1" for="updatePwdcheck">Password 확인</label>
+		                <input class="form-control joinInput" id="updatePwdcheck" type="password" placeholder="패스워드를 입력하세요" />
+	                </div>
+   	                <div class="form-group">
+		                <label class="small mb-1" for="updateUsername">이름</label>
+		                <input class="form-control joinInput" name="username" id="updateUsername" type="text" value="${user.username }" placeholder="이름을 입력하세요" />
+	                </div>
+	                <div class="form-group">
+		                <label class="small mb-1" for="updateTel">휴대전화</label>
+		                <input class="form-control joinInput" name="tel" id="updateTel" type="tel" maxlength="13" value="${user.tel }" placeholder="전화번호를 입력하세요" />
+	                </div>
+  	                <div class="form-group">
+		                <label class="small mb-1" for="updateEmail">이메일</label>
+		                <input class="form-control joinInput" name="email" id="updateEmail" type="email" value="${user.email }" placeholder="이메일을 입력하세요" />
+	                </div>
+					<div class="form-group">
+						<label class="small mb-1">우편번호</label>
+						<input class="form-control joinInput" style="width: 30%" type="text" name="zipcode" id="updateZipcode" value="${user.zipcode }" readonly="readonly">
+					</div>						
+					<div class="form-group">
+						<label class="small mb-1">주소</label>
+						<div class="input-group">
+							<input class="form-control input-group-prepend joinInput" type="text" id="updateAddrView" value="${user.addr }" readonly="readonly">
+							<button type="button" id="updateAddrBtn" class="btn btn-outline-primary input-group-apeend">주소 검색</button>
+						</div>
+					</div>
+  	                <div class="form-group">
+		                <label class="small mb-1" for="updateAddrDetail">상세주소</label>
+		                <input class="form-control joinInput" name="addrDetail" id="updateAddrDetail" type="text" placeholder="상세주소를 입력하세요" />
+	                </div>
+	                <div class="form-group mt-4 mb-0 text-right">
+	                	<button type="button" class="btn btn-info" id="updateBtn">정보수정</button>
+	                	<button type="button" class="btn btn-danger" id="deleteBtn">회원탈퇴</button>
+	                </div>
+           </form>
+      </div>
+      <!-- /.col-lg-9 -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+  <jsp:include page="../includes/footer.jsp"></jsp:include>
+<script src="/myshop/resources/js/update.js"></script>
+
+</body>
+
+</html>

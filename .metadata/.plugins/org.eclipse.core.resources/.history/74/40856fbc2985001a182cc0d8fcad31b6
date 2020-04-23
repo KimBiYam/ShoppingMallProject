@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myshop.mapper.ProductMapper">
+	<resultMap type="com.myshop.domain.ProductVO" id="productMap">
+		<result property="id" column="product_id" />
+		<result property="name" column="product_name" />
+		<result property="price" column="product_price" />
+		<result property="stock" column="product_stock" />
+		<result property="src" column="product_img_src" />
+		<result property="imgname" column="product_img_name" />
+		<result property="categoryname" column="category_name" />
+	</resultMap>
+	<resultMap type="com.myshop.domain.CartVO" id="cartMap">
+		<result property="cartid" column="cart_id"/>
+		<result property="userid" column="user_id"/>
+		<result property="productid" column="product_id"/>
+		<result property="productname" column="product_name"/>
+		<result property="productprice" column="product_price"/>
+		<result property="amount" column="amount"/>
+		<result property="src" column="product_img_src"/>
+		<result property="stock" column="product_stock"/>
+	</resultMap>
+	<resultMap type="" id="orderMap">
+		<result property="orderid" column="order_id"/>
+		<result property="userid" column="user_id"/>
+		<result property="addr" column="order_addr"/>
+		<result property="tel" column="order_tel"/>
+		<result property="approval" column="approval"/>
+		<result property="productname" column="product_name"/>
+		<result property="productprice" column="product_price"/>
+		<result property="src" column="order_img_src"/>
+		<result property="amount" column="amount"/>
+		<result property="ordercode" column="order_code"/>
+	</resultMap>
+	
+	
+	
+	<!-- 카테고리 -->
+	<insert id="categoryRegister">
+		insert into myshop_category
+		values(#{categoryname})
+	</insert>
+	<select id="categorylist" resultType="String">
+		select * from myshop_category
+	</select>
+	<delete id="categoryDelete">
+		delete from myshop_category
+		where category_name = #{categoryname}
+	</delete>
+	<insert id="productRegister">
+		insert into myshop_product values
+		(myshop_product_seq.nextval,#{name},#{price},#{stock},#{src},#{imgname},#{categoryname})
+	</insert>
+	
+	<!-- 상품 -->
+	<select id="productList" resultMap="productMap">
+		select * from myshop_product
+		<if test="value != null">
+			<where>
+				category_name = #{value}
+			</where>
+		</if>
+		order by product_id desc
+	</select>
+	<select id="productGet" resultMap="productMap">
+		select * from myshop_product
+		where product_id = #{id}
+	</select>
+	<update id="productUpdate">
+		update myshop_product set
+		product_name=#{name}, product_price=#{price}, product_stock=#{stock},
+		product_img_src=#{src},category_name=#{categoryname}
+		where product_id = #{id}
+	</update>
+	<delete id="productDelete">
+		delete from myshop_product
+		where product_id = #{id}
+	</delete>
+	
+	
+	<!-- 장바구니 -->	
+	<insert id="cartAdd">
+		insert into myshop_cart
+		values(myshop_cart_seq.nextval,#{userid},#{productid},#{amount})
+	</insert>
+	
+	<select id="cartList" resultMap="cartMap">
+		select *
+		from myshop_cart c,
+			 myshop_product p
+        where c.product_id = p.product_id
+        and user_id=#{userid}
+	</select>
+	
+	<delete id="cartDelete">
+		delete from myshop_cart
+		where cart_id=#{cartid}
+	</delete>
+	
+	<delete id="cartDeleteById">
+		delete from myshop_cart
+		where user_id=#{userid}
+	</delete>
+	
+	<update id="cartAmount">
+		update myshop_cart
+		set amount=#{amount}
+		where cart_id=#{cartid}
+	</update>
+	
+	<!-- 주문 -->
+	<insert id="order">
+		insert into myshop_order
+		values(myshop_order_seq.nextval,#{userid},#{addr},#{tel},0,
+		#{productname},#{productprice},#{src},#{amount},#{ordercode},sysdate)
+	</insert>
+	<!-- 주문시 재고 차감  -->
+	<update id="orderAmount">
+		update myshop_product
+		set product_stock = product_stock - #{amount}
+	</update>
+	<select id="orderList" resultMap="orderMap">
+	
+	</select>
+	
+	
+</mapper>
+
