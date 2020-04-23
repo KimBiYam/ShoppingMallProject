@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.myshop.domain.CartVO;
+import com.myshop.domain.OrderVO;
 import com.myshop.domain.ProductVO;
 import com.myshop.mapper.ProductMapper;
 
@@ -52,7 +55,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void productUpdate(ProductVO product) {
 		// TODO Auto-generated method stub
-		mapper.productUpdate(product);		
+		mapper.productUpdate(product);
 	}
 
 	@Override
@@ -60,7 +63,57 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		mapper.productDelete(id);
 	}
-	
+
+	@Override
+	public void cartAdd(CartVO cart) {
+		// TODO Auto-generated method stub
+		mapper.cartAdd(cart);
+	}
+
+	@Override
+	public List<CartVO> cartList(String userid) {
+		// TODO Auto-generated method stub
+		return mapper.cartList(userid);
+	}
+
+	@Override
+	public void cartDelete(int cartid) {
+		// TODO Auto-generated method stub
+		mapper.cartDelete(cartid);
+
+	}
+
+	@Override
+	public void cartDeleteById(String userid) {
+		// TODO Auto-generated method stub
+		mapper.cartDeleteById(userid);
+	}
+
+	@Override
+	public void cartAmount(int cartid, int amount) {
+		// TODO Auto-generated method stub
+		mapper.cartAmount(cartid, amount);
+	}
+
+	@Override
+	@Transactional
+	public void order(OrderVO order) {
+		// TODO Auto-generated method stub
+		mapper.order(order);
+		mapper.orderAmount(order.getAmount());
+	}
+
+	@Override
+	public List<OrderVO> orderList(String userid) {
+		// TODO Auto-generated method stub
+		return mapper.orderList(userid);
+	}
+
+	@Override
+	public List<OrderVO> orderListByCode(String ordercode) {
+		// TODO Auto-generated method stub
+		return mapper.orderListByCode(ordercode);
+	}
 	
 
 }

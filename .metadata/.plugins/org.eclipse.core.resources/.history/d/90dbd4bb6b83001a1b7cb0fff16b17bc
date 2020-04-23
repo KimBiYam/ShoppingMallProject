@@ -1,8 +1,0 @@
-package com.myshop.service;
-
-import com.myshop.domain.CategoryVO;
-
-public interface ProductService {
-	public void CategoryRegister(CategoryVO category);
-
-}

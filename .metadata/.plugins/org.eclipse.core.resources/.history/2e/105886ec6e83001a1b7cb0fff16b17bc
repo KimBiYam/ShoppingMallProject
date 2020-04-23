@@ -1,9 +1,0 @@
-package com.myshop.service;
-
-import java.util.List;
-
-public interface ProductService {
-	public void categoryRegister(String categoryname);
-	public List<String> categorylist();
-
-}

@@ -1,0 +1,17 @@
+package com.myshop.domain;
+
+import lombok.Data;
+
+@Data
+public class OrderVO {
+	private String orderid;
+	private String userid;
+	private String productname;
+	private int productprice;
+	private String ;
+	
+	
+	
+	
+	
+}

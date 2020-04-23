@@ -1,8 +1,0 @@
-package com.myshop.service;
-
-public interface ProductService {
-	public void CategoryRegister() {
-		
-	}
-
-}

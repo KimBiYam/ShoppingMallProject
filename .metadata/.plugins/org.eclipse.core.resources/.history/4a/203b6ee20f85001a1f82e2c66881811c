@@ -1,0 +1,37 @@
+package com.myshop.service;
+
+import java.util.List;
+
+import com.myshop.domain.CartVO;
+import com.myshop.domain.ProductVO;
+
+public interface ProductService {
+	//카테고리 등록
+	public void categoryRegister(String categoryname);
+	//카테고리 리스트
+	public List<String> categorylist();
+	//카테고리 삭제
+	public void categoryDelete(String categoryname);
+	//상품 등록
+	public void productRegister(ProductVO product);
+	//상품 리스트
+	public List<ProductVO> productList(String category);
+	//상품 정보
+	public ProductVO productGet(int id);
+	//상품 수정
+	public void productUpdate(ProductVO product);
+	//상품 삭제
+	public void productDelete(int id);
+	//카트 추가
+	public void cartAdd(CartVO cart);
+	//카트 정보
+	public CartVO cartGet(int cartid);
+	//카트 리스트
+	public List<CartVO> cartList(String userid);
+	//카트 삭제
+	public void cartDelete(int cartid);
+	//카트 비우기
+	public void cartDeleteById(String userid);
+	
+	
+}

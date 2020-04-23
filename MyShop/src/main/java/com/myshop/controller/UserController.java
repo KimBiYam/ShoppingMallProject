@@ -53,12 +53,6 @@ public class UserController {
 		}
 	}
 
-//	마이페이지
-	@PreAuthorize("isAuthenticated()")
-	@GetMapping("/mypage")
-	public void mypage() {
-	}
-
 //	회원정보 수정 페이지
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/update")
