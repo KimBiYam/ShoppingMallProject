@@ -290,7 +290,6 @@ public class ProductController {
 	@GetMapping("/order/get")
 	public void orderGet(@ModelAttribute("userid") String userid, String ordercode, Model model) {
 		List<OrderVO> orderlist = service.orderListByCode(ordercode);
-		System.out.println(orderlist.get(0).getSrc());
 
 		int total = 0;
 		for (int i = 0; i < orderlist.size(); i++) {

@@ -30,6 +30,9 @@
           <li class="nav-item">
             <a class="nav-link" href="/myshop/board/list?type=1"><i class="fas fa-align-justify"></i> 게시판</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/myshop/map"><i class="fa fa-map"></i>` 지도</a>
+          </li>
           <sec:authorize access="isAnonymous()">
           <li class="nav-item">
             <a class="nav-link" href="javascript:join()">회원가입</a>
