@@ -37,12 +37,6 @@
 	<beans:bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	</beans:bean>
-	<!-- 파일 업로드 경로  -->
-	<beans:bean id="uploadPath" class="java.lang.String">
-		<!-- 파일 업로드 디렉토리  -->		
-		<beans:constructor-arg value="C:\Users\admin\Desktop\창현\ShoppingMallProject\.metadata\.plugins\org.eclipse.wst.server.core\tmp8\wtpwebapps\MyShop\resources\img"/>
-	</beans:bean>
 	
-
 
 </beans:beans>

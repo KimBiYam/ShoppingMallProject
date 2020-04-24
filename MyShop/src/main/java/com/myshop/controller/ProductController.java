@@ -4,7 +4,8 @@ import java.io.File;
 import java.util.List;
 import java.util.UUID;
 
-import javax.annotation.Resource;
+import javax.annotation.PostConstruct;
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -27,8 +28,16 @@ import com.myshop.service.ProductService;
 public class ProductController {
 	@Autowired
 	ProductService service;
-	@Resource(name = "uploadPath")
-	String uploadPath;
+	@Autowired
+	ServletContext c;
+	private String uploadPath;
+
+//	컨트롤러 초기화 시 실제 서버의 경로를 받아와 이미지 저장 경로를 지정
+	@PostConstruct
+	public void initController() {
+		this.uploadPath = c.getRealPath("/resources/img");
+		System.out.println("uploadPath:"+uploadPath);
+	}
 
 //	메인 페이지
 	@GetMapping("/home")
@@ -317,7 +326,6 @@ public class ProductController {
 	@GetMapping("/order/admin/get")
 	public String orderAdminGet(String ordercode, Model model) {
 		List<OrderVO> orderlist = service.orderListByCode(ordercode);
-		System.out.println(orderlist.get(0).getSrc());
 
 		int total = 0;
 		for (int i = 0; i < orderlist.size(); i++) {
