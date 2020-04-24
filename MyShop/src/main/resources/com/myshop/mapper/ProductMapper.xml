@@ -36,6 +36,7 @@
 		<result property="ordercode" column="order_code"/>
 		<result property="orderdate" column="order_date"/>
 		<result property="rownum" column="rn"/>
+		<result property="productid" column="product_id"/>
 	</resultMap>
 	
 	
@@ -115,8 +116,8 @@
 	<!-- 주문 -->
 	<insert id="order">
 		insert into myshop_order
-		values(myshop_order_seq.nextval,#{userid},#{addr},#{tel},0,
-		#{productname},	#{productprice},#{src},#{amount},#{ordercode},sysdate)
+		values(myshop_order_seq.nextval,#{userid},#{addr},#{tel},'승인안됨',
+		#{productname},	#{productprice},#{src},#{amount},#{ordercode},sysdate,#{productid})
 	</insert>
 	<!-- 주문시 재고 차감  -->
 	<update id="orderAmount">
@@ -126,12 +127,12 @@
 	</update>
  	<select id="orderList" resultMap="orderMap">
   		select rownum rn,order_id,order_id,user_id,order_addr,order_tel,
-  		approval,product_name,product_price,order_img_src,amount,order_code,order_date
+  		approval,product_name,product_price,order_img_src,amount,order_code,order_date,product_id
   		from (        
         select *
 		from myshop_order		
 		where rowid in (select max(rowid) from myshop_order group by order_code)
-		order by order_id desc
+		order by order_id
         )
         order by rn desc
 	</select>
@@ -141,16 +142,37 @@
 	</select>
  	<select id="orderListById" resultMap="orderMap">
   		select rownum rn,order_id,order_id,user_id,order_addr,order_tel,
-  		approval,product_name,product_price,order_img_src,amount,order_code,order_date
+  		approval,product_name,product_price,order_img_src,amount,order_code,order_date,product_id
   		from (        
         select *
 		from myshop_order
 		where user_id=#{userid}
 		and rowid in (select max(rowid) from myshop_order group by order_code)
-		order by order_id desc
+		order by order_id
         )
         order by rn desc
 	</select>	
+	<select id="orderCancel">
+		update myshop_order
+		set approval = '주문취소'
+		where order_code = #{ordercode}		
+	</select>
+	<update id="orderCancelAmount">
+		update myshop_product
+		set product_stock = product_stock + #{amount}
+		where product_id = #{productid}		
+	</update>
+	<delete id="orderDeleteById">
+		delete * from myshop_order
+		where user_id = #{userid}
+	</delete>
+	<update id="orderApproval">
+		update myshop_order
+		set approval = '주문승인'
+		where order_code = #{ordercode}
+	</update>
+	
+		
 
 	
 </mapper>

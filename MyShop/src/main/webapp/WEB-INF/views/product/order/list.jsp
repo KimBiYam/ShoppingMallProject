@@ -15,30 +15,25 @@
 <title>주문내역</title>
 </head>
 <body>
-	<jsp:include page="../includes/header.jsp" />
-	<jsp:include page="../includes/usersidebar.jsp" />
-	<div class="col-lg-9">
-		<h1 class="my-5 text-center">주문내역</h1>
+	<jsp:include page="../../includes/header.jsp" />
+	<jsp:include page="../../includes/usersidebar.jsp" />
+	<div class="col-lg-9 text-center">
+		<h1 class="my-5">주문내역</h1>
 		<table class="table">
 			<tr>
 				<th>주문번호</th>
 				<th>주문일</th>
 				<th>배송 주소지</th>
 				<th>전화번호</th>
-				<th>주문승인결과</th>				
+				<th>주문 처리 상태</th>				
 			</tr>
 			<c:forEach items="${orderlist }" var="orderlist">
 			<tr>
-				<td><a href="/myshop/product/order/get?ordercode=${orderlist.ordercode }">${orderlist.rownum }</a></td>
+				<td><a href="/myshop/product/order/get?ordercode=${orderlist.ordercode }&userid=${orderlist.userid }">${orderlist.rownum }</a></td>
 				<td><fmt:formatDate value="${orderlist.orderdate }"/> </td>
 				<td>${orderlist.addr }</td>
 				<td>${orderlist.tel }</td>
-				<c:if test="${orderlist.approval eq 0 }">
-				<td>승인안됨</td>
-				</c:if>
-				<c:if test="${orderlist.approval eq 1 }">
-				<td>처리완료</td>
-				</c:if>
+				<td>${orderlist.approval }</td>
 			</tr>
 			</c:forEach>
 		</table>				
@@ -48,7 +43,7 @@
 	<!-- /.row -->
 	</div>	
 	<!-- /.container -->
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
+	<jsp:include page="../../includes/footer.jsp"></jsp:include>
 
 <script type="text/javascript">
 </script>

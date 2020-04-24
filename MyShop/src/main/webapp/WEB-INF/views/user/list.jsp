@@ -17,7 +17,7 @@
 <body>
 	<jsp:include page="../includes/header.jsp" />
 	<!-- Page Content -->
-	<div class="container">
+	<div class="container" style="min-height: 1000px;">
 		<div class="card my-5">
 			<div class="card-header">
 				<div class="card-body">

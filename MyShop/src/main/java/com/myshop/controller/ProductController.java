@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -82,7 +83,7 @@ public class ProductController {
 	public String productRegister(ProductVO product) throws Exception {
 		// 파일 경로와 파일명 설정
 		UUID uuid = UUID.randomUUID();
-		String savedName = uuid.toString() + product.getFile().getOriginalFilename();
+		String savedName = uuid.toString() + "_" + product.getFile().getOriginalFilename();
 		File target = new File(uploadPath, savedName);
 		// 실제 파일을 받아와서 업로드
 		FileCopyUtils.copy(product.getFile().getBytes(), target);
@@ -113,7 +114,7 @@ public class ProductController {
 
 		if (imgModify.equals("1")) {
 			UUID uuid = UUID.randomUUID();
-			String savedName = uuid.toString() + product.getFile().getOriginalFilename();
+			String savedName = uuid.toString() + "_" + product.getFile().getOriginalFilename();
 			File target = new File(uploadPath, savedName);
 
 			FileCopyUtils.copy(product.getFile().getBytes(), target);
@@ -188,62 +189,83 @@ public class ProductController {
 	}
 
 //	장바구니 보기
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/cart")
-	public void cart(String userid, Model model) {
+	public void cart(@ModelAttribute("userid") String userid, Model model) {
 		List<CartVO> cartlist = service.cartList(userid);
+
+		for (int i = 0; i < cartlist.size(); i++) {
+
+		}
 
 		model.addAttribute("cartlist", cartlist);
 	}
 
 //	장바구니 삭제
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/cart/delete")
-	public String cartDelete(String userid, int cartid) {
+	public String cartDelete(@ModelAttribute("userid") String userid, int cartid) {
 		service.cartDelete(cartid);
 
 		return "redirect:/product/cart?userid=" + userid;
 	}
 
 //	장바구니 비우기
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/cart/deleteById")
-	public String cartDeleteById(String userid) {
+	public String cartDeleteById(@ModelAttribute("userid") String userid) {
 		service.cartDeleteById(userid);
 
 		return "redirect:/product/cart?userid=" + userid;
 	}
 
 //	장바구니 갯수 수정
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("principal.username == #userid")
 	@PostMapping("/cart/amount")
-	public String cartAmount(int cartid, int amount, String userid) {
+	public String cartAmount(int cartid, int amount, @ModelAttribute("userid") String userid) {
 		service.cartAmount(cartid, amount);
 		return "redirect:/product/cart?userid=" + userid;
 	}
 
 //	주문 페이지
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/order")
-	public void order(String userid, Model model) {
+	public String order(@ModelAttribute("userid") String userid, Model model) {
 		List<CartVO> cartlist = service.cartList(userid);
 
 		model.addAttribute("cartlist", cartlist);
+
+		return "/product/order/order";
 	}
 
 //	상품 주문
 	@PreAuthorize("hasRole('ROLE_USER')")
 	@PostMapping("/order")
-	public String order(OrderVO order) {
+	public String order(@ModelAttribute("order") OrderVO order) throws Exception {
+
 		List<CartVO> cartlist = service.cartList(order.getUserid());
 		UUID ordercode = UUID.randomUUID();
 		order.setOrdercode(ordercode.toString());
 
 		for (int i = 0; i < cartlist.size(); i++) {
+
 			order.setProductname(cartlist.get(i).getProductname());
 			order.setProductprice(cartlist.get(i).getProductprice());
-			order.setSrc(cartlist.get(i).getSrc());
+			order.setProductid(cartlist.get(i).getProductid());
 			order.setAmount(cartlist.get(i).getAmount());
+
+			ProductVO product = service.productGet(order.getProductid());
+			String fileName = product.getImgname();
+
+			File file = new File(uploadPath + "/" + fileName);
+			File newFile = new File(uploadPath + "/order/" + fileName);
+
+			if (file.exists()) {
+				FileCopyUtils.copy(file, newFile);
+			}
+
+			order.setSrc("/myshop/resources/img/order/" + fileName);
+
 			service.order(order, cartlist.get(i));
 		}
 
@@ -253,34 +275,85 @@ public class ProductController {
 	}
 
 //	주문 리스트
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/order/list")
-	public String orderListById(String userid, Model model) {
-		
+	public void orderListById(@ModelAttribute("userid") String userid, Model model) {
+
 		List<OrderVO> orderlist = service.orderListById(userid);
 
 		model.addAttribute("orderlist", orderlist);
-		
 
-		return "/product/orderlist";
 	}
 
 //	주문 가져오기
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/order/get")
-	public String orderGet(String ordercode, Model model) {
+	public void orderGet(@ModelAttribute("userid") String userid, String ordercode, Model model) {
 		List<OrderVO> orderlist = service.orderListByCode(ordercode);
-		
+		System.out.println(orderlist.get(0).getSrc());
+
 		int total = 0;
 		for (int i = 0; i < orderlist.size(); i++) {
 			total = total + (orderlist.get(i).getAmount() * orderlist.get(i).getProductprice());
 		}
 
-		
+		model.addAttribute("total", total);
+		model.addAttribute("orderlist", orderlist);
+	}
+
+//	관리자 주문 리스트
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/order/admin/list")
+	public String orderList(Model model) {
+
+		List<OrderVO> orderlist = service.orderList();
+
+		model.addAttribute("orderlist", orderlist);
+
+		return "/product/order/adminlist";
+	}
+
+//	관리자 주문 가져오기
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/order/admin/get")
+	public String orderAdminGet(String ordercode, Model model) {
+		List<OrderVO> orderlist = service.orderListByCode(ordercode);
+		System.out.println(orderlist.get(0).getSrc());
+
+		int total = 0;
+		for (int i = 0; i < orderlist.size(); i++) {
+			total = total + (orderlist.get(i).getAmount() * orderlist.get(i).getProductprice());
+		}
+
 		model.addAttribute("total", total);
 		model.addAttribute("orderlist", orderlist);
 
-		return "/product/orderget";
+		return "/product/order/adminget";
+	}
+
+//	주문 취소
+	@PreAuthorize("principal.username == #userid or hasRole('ROLE_ADMIN')")
+	@GetMapping("/order/cancel")
+	public String orderCancel(@ModelAttribute("userid") String userid, String ordercode) {
+
+		service.orderCancel(ordercode);
+
+		List<OrderVO> orderlist = service.orderListByCode(ordercode);
+		for (int i = 0; i < orderlist.size(); i++) {
+			service.orderCancelAmount(orderlist.get(i).getProductid(), orderlist.get(i).getAmount());
+		}
+
+		return "redirect:/";
+	}
+
+//	주문 승인
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/order/approval")
+	public String orderApproval(String ordercode) {
+
+		service.orderApproval(ordercode);
+
+		return "redirect:/";
 	}
 
 }

@@ -9,8 +9,8 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<title>My Shop</title>
+<link rel="stylesheet" href="/myshop/resources/css/shop-homepage.css">
 </head>
-
 <body>
 <jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/productsidebar.jsp"/>
@@ -50,7 +50,7 @@
 	                ${products.price }
 	                <i class="fas fa-won-sign"></i>
                 </h5>
-                <c:if test="${products.stock == 0 }">
+                <c:if test="${products.stock <= 0 }">
                 <p class="card-text text-danger">
                 	품절
                 </p>

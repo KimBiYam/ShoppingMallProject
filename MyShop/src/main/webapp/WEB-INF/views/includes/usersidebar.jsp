@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
   <!-- Page Content -->
-  <div class="container my-5">
+  <div class="container my-5" style="min-height: 1000px">
     <div class="row">
       <div class="col-lg-3">
         <h1 class="my-4">마이페이지</h1>

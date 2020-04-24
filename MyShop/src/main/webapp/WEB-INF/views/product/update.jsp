@@ -16,7 +16,7 @@
 <jsp:include page="../includes/header.jsp"/>
   <!-- Page Content -->
 	<div class="container my-5">
-		<div class="row justify-content-center">
+		<div class="row justify-content-center" style="min-height: 1000px">
 			<div class="col-lg-9 my-5">
 			<div class="text-center">
 			<img id="productimg" width="300px" src="${product.src }">
@@ -115,6 +115,15 @@
 				}
 			})
 		})
+		
+		// 카테고리 체크
+		var categoryname = "${product.categoryname}";		
+		$("#categoryname option").each(function(){
+			if(categoryname == $(this).val()){
+				$(this).prop("selected",true);
+				}
+		});
+		
 	</script>
   <jsp:include page="../includes/footer.jsp"></jsp:include>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>

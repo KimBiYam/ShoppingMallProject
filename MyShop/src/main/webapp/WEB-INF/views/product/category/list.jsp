@@ -17,7 +17,8 @@
 <body>
 	<jsp:include page="../../includes/header.jsp" />
 	<!-- Page Content -->
-	<div class="container my-5">
+	<div class="container my-5 text-center justify-content-center" style="min-height: 1000px">
+	<h1 class="my-5">카테고리 관리</h1>
 		<div class="card my-5">
 			<div class="card-header">
 				<div class="card-body">

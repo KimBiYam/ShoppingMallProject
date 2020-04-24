@@ -10,7 +10,7 @@ public class OrderVO {
 	private String userid;
 	private String addr;
 	private String tel;
-	private int approval;
+	private String approval;
 	private String productname;
 	private int productprice;
 	private String src;
@@ -18,5 +18,6 @@ public class OrderVO {
 	private String ordercode;
 	private Date orderdate;
 	private int rownum;
-
+	private int productid;
+	
 }

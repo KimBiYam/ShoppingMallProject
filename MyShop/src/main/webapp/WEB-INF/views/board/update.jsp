@@ -17,7 +17,7 @@
 <body>
 <jsp:include page="../includes/header.jsp"/>
   <!-- Page Content -->
-	<div class="container my-5">
+	<div class="container my-5" style="min-height: 1000px">
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
 			<c:if test="${board.type eq 1 }">

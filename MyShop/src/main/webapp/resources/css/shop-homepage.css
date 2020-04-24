@@ -4,5 +4,6 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-shop-homepage/blob/master/LICENSE)
  */
 body {
+  min-height: 1000px;
   padding-top: 56px;
 }

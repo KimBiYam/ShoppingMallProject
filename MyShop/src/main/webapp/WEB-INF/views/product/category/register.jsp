@@ -16,7 +16,8 @@
 <body>
 <jsp:include page="../../includes/header.jsp"/>
   <!-- Page Content -->
-	<div class="container my-5">
+	<div class="container my-5" style="min-height: 1000px">
+		<h1 class="my-5 text-center">카테고리 등록</h1>
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
 				<form id="registerForm" action="/myshop/product/category/register" method="post">

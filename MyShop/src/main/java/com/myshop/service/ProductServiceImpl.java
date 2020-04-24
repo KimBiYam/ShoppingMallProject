@@ -108,7 +108,7 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return mapper.orderListById(userid);
 	}
-	
+
 	@Override
 	public List<OrderVO> orderListByCode(String ordercode) {
 		// TODO Auto-generated method stub
@@ -121,6 +121,23 @@ public class ProductServiceImpl implements ProductService {
 		return mapper.orderList();
 	}
 
+	@Override
+	public void orderCancel(String ordercode) {
+		// TODO Auto-generated method stub
+		mapper.orderCancel(ordercode);
 
+	}
+
+	@Override
+	public void orderCancelAmount(int productid, int amount) {
+		// TODO Auto-generated method stub
+		mapper.orderCancelAmount(productid, amount);
+	}
+
+	@Override
+	public void orderApproval(String ordercode) {
+		// TODO Auto-generated method stub
+		mapper.orderApproval(ordercode);		
+	}
 
 }

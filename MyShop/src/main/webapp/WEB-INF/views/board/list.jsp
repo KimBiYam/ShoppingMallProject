@@ -16,7 +16,7 @@
 <body>
 	<jsp:include page="../includes/header.jsp" />
 	<!-- Page Content -->
-	<div class="container my-5">
+	<div class="container my-5" style="min-height: 1000px">
 		<div class="card my-5">
 			<div class="card-header">
 			<i class="fas fa-align-justify"></i>

@@ -29,6 +29,10 @@ public interface ProductService {
 	public List<OrderVO> orderList();
 	public List<OrderVO> orderListByCode(String ordercode);
 	public List<OrderVO> orderListById(String userid);
+	public void orderCancel(String ordercode);
+	public void orderCancelAmount(int productid, int amount);
+	public void orderApproval(String ordercode);
+	
 	
 	
 }

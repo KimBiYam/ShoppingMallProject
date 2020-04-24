@@ -15,7 +15,7 @@
 <body>
 <jsp:include page="../includes/header.jsp"/>
   <!-- Page Content -->
-	<div class="container my-5">
+	<div class="container my-5" style="min-height: 1000px">
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
 			<div class="text-center">
@@ -104,6 +104,7 @@
 				alert("이미지를 선택하세요");
 				return false;
 				}
+			alert("상품 등록이 완료되었습니다");
 			$("#registerForm").submit();
 			});
 		})

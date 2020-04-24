@@ -18,7 +18,13 @@
 	<jsp:include page="../includes/header.jsp" />
 	<jsp:include page="../includes/usersidebar.jsp" />
 	<div class="col-lg-9">
-		<h1 class="my-5 text-center">장바구니</h1>		
+			<c:if test="${fn:length(cartlist) <= 0 }">
+			<div class="my-5 text-center">
+				<h1>장바구니가 비었습니다</h1>
+			</div>
+			</c:if>
+		<c:if test="${fn:length(cartlist) > 0 }">
+		<h1 class="my-5 text-center">장바구니</h1>
 		<table class="table">
 			<tr>
 				<th>상품 이미지</th>
@@ -29,6 +35,7 @@
 				<th>총액</th>
 				<th>삭제</th>
 			</tr>
+
 			<c:forEach items="${cartlist }" var="cartlist">
 				<tr>
 					<td>
@@ -41,14 +48,14 @@
 					<td>
 						<form id="amountForm" action="/myshop/product/cart/amount" method="post">
 							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-							<input type="hidden" name="cartid" value="${cartlist.cartid }">
+							<input type="hidden" id="cartid" name="cartid">
 							<input type="hidden" name="userid" value='<sec:authentication property="principal.username"/>'>
-							<select id="amount" name="amount" class="selectpicker" data-size="5">						
+							<select id="amount" name="amount" data-width="fit" class="selectpicker" data-size="5">						
 							<c:forEach var="i" begin="1" end="${cartlist.stock }">
 								<option value="${i }">${i }</option>
 							</c:forEach>
 							</select>
-							<button type="button" id="btnAmount" class="btn btn-sm btn-outline-info">수정</button>
+							<a href="javascript:cartAmount('${cartlist.cartid }')" class="btn btn-sm btn-outline-info">수정</a>
 						</form>						
 					</td>
 					<td>${cartlist.productprice*cartlist.amount } <i class="fas fa-won-sign"></i></td>
@@ -56,8 +63,6 @@
 				</tr>
 			</c:forEach>
 		</table>
-		<!-- 리스트 사이즈가 0 이상일때만 버튼 출력  -->
-		<c:if test="${fn:length(cartlist) > 0 }">		
 		<div class="text-right">
 			<a href="javascript:cartDeleteById()" class="btn btn-outline-danger">비우기</a>
 			<a href="/myshop/product/order?userid=<sec:authentication property="principal.username"/>" class="btn btn-outline-primary">주문하기</a>			
@@ -72,14 +77,12 @@
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
 
 <script type="text/javascript">
-$(function(){
-	$("#btnAmount").on("click",function(){
-		$("#amountForm").submit();
-		alert("갯수가 수정되었습니다");
-		})
-	
-})
-	function cartDelete(cartid){
+	function cartAmount(cartid){
+			$("#cartid").val(cartid);
+			$("#amountForm").submit();
+			alert("갯수가 수정되었습니다");
+		}	
+	function cartDelete(cartid){	
 		if(confirm("정말 해당 물품을 장바구니에서 삭제하시겠습니까?")){
 			alert("해당 물품이 장바구니에서 삭제되었습니다");
 			location.href = "/myshop/product/cart/delete?userid=<sec:authentication property="principal.username"/>&cartid="+cartid;

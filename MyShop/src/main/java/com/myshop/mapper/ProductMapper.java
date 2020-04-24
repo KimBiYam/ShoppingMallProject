@@ -32,5 +32,9 @@ public interface ProductMapper {
 	public List<OrderVO> orderList();
 	public List<OrderVO> orderListByCode(String ordercode);
 	public List<OrderVO> orderListById(String userid);
+	public void orderCancel(String ordercode);
+	public void orderCancelAmount(@Param("productid") int productid,@Param("amount") int amount);
+	public void orderDeleteById(String userid);
+	public void orderApproval(String ordercode);
 	
 }

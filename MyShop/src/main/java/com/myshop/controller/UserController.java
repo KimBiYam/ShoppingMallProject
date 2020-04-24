@@ -54,7 +54,7 @@ public class UserController {
 	}
 
 //	회원정보 수정 페이지
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@GetMapping("/update")
 	public void update(Principal principal, Model model) {
 		String userid = principal.getName();
@@ -63,7 +63,7 @@ public class UserController {
 	}
 
 //	회원 정보 수정
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@PostMapping("/update")
 	public String update(Principal principal, UserVO user) {
 		user.setUserid(principal.getName());

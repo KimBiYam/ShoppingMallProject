@@ -35,7 +35,7 @@
 				<td>					
 					<div class="form-group">
 						<label class="small mb-1" for="stock">갯수</label><br>
-						<select id="stock" name="stock" data-size="5" class="selectpicker">
+						<select id="stock" name="stock" data-width="fit" data-size="5" class="selectpicker">
 						<c:forEach var="i" begin="1" end="${product.stock }">
 							<option value="${i }">${i }</option>
 						</c:forEach>
@@ -53,7 +53,7 @@
 					<c:if test="${product.stock > 0 }">					
 					<th> 재고 : ${product.stock }개</th>
 					</c:if>
-					<c:if test="${product.stock == 0 }">					
+					<c:if test="${product.stock <= 0 }">					
 					<td>
 						<p class="text-danger">품절</p>
 					</td>

@@ -15,8 +15,8 @@
 </head>
 <link rel="stylesheet"	href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
 <body>
-	<jsp:include page="../includes/header.jsp" />
-	<jsp:include page="../includes/usersidebar.jsp" />
+	<jsp:include page="../../includes/header.jsp" />
+	<jsp:include page="../../includes/usersidebar.jsp" />
 	<div class="col-lg-9">
 		<h1 class="my-5 text-center">주문하기</h1>
 		<table class="table">
@@ -77,7 +77,7 @@
 	<!-- /.row -->
 	</div>	
 	<!-- /.container -->
-	<jsp:include page="../includes/footer.jsp"></jsp:include>
+	<jsp:include page="../../includes/footer.jsp"></jsp:include>
 
 <script type="text/javascript">
 </script>
