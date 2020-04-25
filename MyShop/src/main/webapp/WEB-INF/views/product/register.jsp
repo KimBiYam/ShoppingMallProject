@@ -104,6 +104,18 @@
 				alert("이미지를 선택하세요");
 				return false;
 				}
+			if($("#price").val() <= 0){
+				alert("가격은 1이상의 값을 입력해주세요");
+				$("#price").val("");
+				$("#price").focus();
+				return false;
+				}
+			if($("#stock").val() < 0){
+				alert("재고는 0이상의 값을 입력해주세요");
+				$("#stock").val("");
+				$("#stock").focus();
+				return false;
+				}
 			alert("상품 등록이 완료되었습니다");
 			$("#registerForm").submit();
 			});

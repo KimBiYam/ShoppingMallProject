@@ -29,8 +29,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional
 	public void categoryDelete(String categoryname) {
 		// TODO Auto-generated method stub
+		mapper.productDeleteByCategory(categoryname);
 		mapper.categoryDelete(categoryname);
 	}
 

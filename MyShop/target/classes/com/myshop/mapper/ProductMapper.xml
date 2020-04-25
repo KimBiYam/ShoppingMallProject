@@ -81,6 +81,10 @@
 		delete from myshop_product
 		where product_id = #{id}
 	</delete>
+	<delete id="productDeleteByCategory">
+		delete from myshop_product
+		where category_name=#{categoryname}
+	</delete>
 	
 	
 	<!-- 장바구니 -->	

@@ -18,7 +18,7 @@
 	<jsp:include page="includes/header.jsp" />
 	<!-- Page Content -->
 	<div class="container my-5" style="min-height: 1000px">
-		<h1 class="text-center">학원 위치</h1>
+		<h1 class="text-center">쇼핑몰 위치</h1>
 		<div class="row justify-content-center my-5">
 			<div class="text-center" id="map" style="width: 800px; height: 800px;"></div>
 		</div>
@@ -56,7 +56,7 @@
 								// 인포윈도우로 장소에 대한 설명을 표시합니다
 								var infowindow = new daum.maps.InfoWindow(
 										{
-											content : "<div style='width:150px;text-align:center;padding:6px 0;'><b>학원 위치</b><br>부산IT교육센터<br>부산 부산진구<br>중앙대로 708<?echo $my_shop_name;?></div>"
+											content : "<div style='width:150px;text-align:center;padding:6px 0;'><b>쇼핑몰 위치</b><br>부산IT교육센터<br>부산 부산진구<br>중앙대로 708<?echo $my_shop_name;?></div>"
 
 										});
 								infowindow.open(map, marker);

@@ -18,6 +18,7 @@ public interface ProductMapper {
 	public ProductVO productGet(int id);
 	public void productUpdate(ProductVO product);
 	public void productDelete(int id);
+	public void productDeleteByCategory(String categoryname);
 	
 	public void cartAdd(CartVO cart);
 	public CartVO cartCheck(String userid);
