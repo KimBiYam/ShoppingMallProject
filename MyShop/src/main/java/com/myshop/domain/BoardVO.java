@@ -6,13 +6,13 @@ import lombok.Data;
 
 @Data
 public class BoardVO {
-	private Long bnum;
-	private String userid;
+	private Long bno;
 	private String title;
 	private String content;
-	private Date regdate;
-	private int btype;
-	private int viewcnt;	
-	private int commentcnt;	
+	private String writer;
+	private Date regDate;
+	private int replycnt;
+	private int viewcnt;
+	
 
 }

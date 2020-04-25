@@ -28,7 +28,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/myshop/board/list?btype=1"><i class="fas fa-align-justify"></i> 게시판</a>
+            <a class="nav-link" href="/myshop/board/list"><i class="fas fa-align-justify"></i> 게시판</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/myshop/map"><i class="fa fa-map"></i>` 지도</a>

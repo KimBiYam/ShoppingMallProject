@@ -10,106 +10,77 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myshop.domain.BoardVO;
 import com.myshop.domain.Criteria;
 import com.myshop.domain.PageDTO;
 import com.myshop.service.BoardService;
 
-@RequestMapping("/board/*")
 @Controller
+@RequestMapping("/board/*")
 public class BoardController {
 	@Autowired
 	BoardService service;
 
-//	리스트
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/register")
+	public void getRegister() {
+
+	}
+
+	@PostMapping("/register")
+	public String register(BoardVO board) {
+		service.register(board);
+		return "redirect:/board/list";
+	}
+
 	@GetMapping("/list")
-	public void list(@ModelAttribute("btype") int btype, Criteria cri, Model model) {
+	public void list(Criteria cri, Model model) {
+		List<BoardVO> list = service.getList(cri);
+		model.addAttribute("list", list);
 
-		List<BoardVO> list = service.boardList(cri);
-
-		int total = service.getcount(cri);
+		int total = service.getTotal(cri);
 		int rowNo = total - ((cri.getPageNum() - 1) * cri.getAmount());
 
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 		model.addAttribute("rowNo", rowNo);
-
-		model.addAttribute("list", list);
 	}
 
-//	글쓰기 페이지
-	@GetMapping("/insert")
-	public void insert(@ModelAttribute("btype") int btype, Model model) {
-	}
-
-//	글쓰기
-	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/insert")
-	public String insert(@ModelAttribute("btype") int btype, BoardVO board) {
-		service.boardInsert(board);
-		return "redirect:/board/list?btype=" + btype;
-	}
-
-//	공지사항 글쓰기 페이지
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/admin/insert")
-	public String adminInsert(@ModelAttribute("btype") int btype, Model model) {
-		return "/board/insert";
-	}
-
-//	공지사항 글쓰기
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/admin/insert")
-	public String adminInsert(@ModelAttribute("btype") int btype, BoardVO board) {
-		service.boardInsert(board);
-		return "redirect:/board/list?btype=" + btype;
-	}
-
-//	글 보기
 	@GetMapping("/get")
-	public void get(Long bnum, Model model) {
-		BoardVO board = service.boardGet(bnum);
-		service.viewcnt(bnum);
+	public void get(Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+		BoardVO board = service.get(bno);
+		service.viewcnt(bno);
 		model.addAttribute("board", board);
 	}
 
-//	글 수정 페이지
-	@GetMapping("/update")
-	public void update(Long bnum, Model model) {
-		BoardVO board = service.boardGet(bnum);
+	@GetMapping("/modify")
+	public void modify(Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+		BoardVO board = service.get(bno);
 		model.addAttribute("board", board);
 	}
 
-//	글 수정
-	@PreAuthorize("hasRole('ROLE_ADMIN') or principal.username == #board.userid")
-	@PostMapping("/update")
-	public String update(BoardVO board) {
-		service.boardUpdate(board);
-		return "redirect:/board/list?btype=" + board.getBtype();
+	@PreAuthorize("principal.username == #board.writer")
+	@PostMapping("/modify")
+	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
+		service.modify(board);
+
+		return "redirect:/board/list" + cri.getListLink();
 	}
 
-//	공지사항 글 수정
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@PostMapping("/admin/update")
-	public String adminUpdate(BoardVO board) {
-		service.boardUpdate(board);
-		return "redirect:/board/list?btype=" + board.getBtype();
+	@PreAuthorize("principal.username == #writer")
+	@PostMapping("/delete")
+	public String modify(@RequestParam("bno") Long bno, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr,
+			String writer) {
+		service.delete(bno);
+
+		return "redirect:/board/list" + cri.getListLink();
 	}
 
-//	글 삭제
-	@PreAuthorize("hasRole('ROLE_ADMIN') or principal.username == #userid")
-	@GetMapping("/delete")
-	public String delete(Long bnum, String userid, int btype) {
-		service.boardDelete(bnum);
-		return "redirect:/board/list?btype=" + btype;
-	}
-
-//	공지사항 글 삭제
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/admin/delete")
-	public String adminDelete(Long bnum, int btype) {
-		service.boardDelete(bnum);
-		return "redirect:/board/list?btype=" + btype;
+	@GetMapping("/map")
+	public void getMap() {
+		
 	}
 
 }

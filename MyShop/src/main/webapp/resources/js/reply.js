@@ -7,7 +7,7 @@ var replyService = (function() {
 
 		$.ajax({
 			type : 'post',
-			url : '/myapp/replies/new',
+			url : '/myshop/replies/new',
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
@@ -47,7 +47,7 @@ var replyService = (function() {
 	    var bno = param.bno;
 	    var page = param.page || 1;
 	    
-	    $.getJSON("/myapp/replies/pages/" + bno + "/" + page + ".json",
+	    $.getJSON("/myshop/replies/pages/" + bno + "/" + page + ".json",
 	        function(data) {
 	          if (callback) {
 	            //callback(data); // 댓글 목록만 가져오는 경우
@@ -64,7 +64,7 @@ var replyService = (function() {
 	function remove(rno, replyer,  callback, error) {
 		$.ajax({
 			type : 'delete',
-			url : '/myapp/replies/' + rno,			
+			url : '/myshop/replies/' + rno,			
 			data : JSON.stringify({rno:rno, replyer:replyer	}),
 			contentType : "application/json; charset=utf-8",	
 			success : function(deleteResult, status, xhr) {
@@ -86,7 +86,7 @@ var replyService = (function() {
 
 		$.ajax({
 			type : 'put',
-			url : '/myapp/replies/' + reply.rno,
+			url : '/myshop/replies/' + reply.rno,
 			data : JSON.stringify(reply),
 			contentType : "application/json; charset=utf-8",
 			success : function(result, status, xhr) {
@@ -104,7 +104,7 @@ var replyService = (function() {
 
 	function get(rno, callback, error) {
 
-		$.get("/myapp/replies/" + rno + ".json", function(result) {
+		$.get("/myshop/replies/" + rno + ".json", function(result) {
 
 			if (callback) {
 				callback(result);

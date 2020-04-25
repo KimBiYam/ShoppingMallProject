@@ -2,24 +2,24 @@ package com.myshop.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.myshop.domain.BoardVO;
 import com.myshop.domain.Criteria;
 
 public interface BoardMapper {
-//	글쓰기
-//	리스트
-//	상세보기
-//	수정
-//	삭제
-//	조회수
-//	글 갯수
-//	회원 탈퇴 시 글 삭제
-	public void boardInsert(BoardVO board);
-	public List<BoardVO> boardList(Criteria cri);
-	public BoardVO boardGet(Long bnum);
-	public void boardUpdate(BoardVO board);
-	public void boardDelete(Long bnum);
-	public void viewcnt(Long bnum);
-	public void getcount(int type);
-	public void userDelete(String userid);
+	//작성
+	//조회
+	//리스트
+	//수정
+	//삭제
+	public void register(BoardVO board);
+	public BoardVO get(Long bno);
+	public List<BoardVO> list();
+	public void modify(BoardVO board);
+	public void delete(Long bno);
+	public List<BoardVO> getListWithPaging(Criteria cri);
+	public int getTotalCount(Criteria cri);
+	public void viewcnt(Long bno);
+	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
 }

@@ -22,8 +22,6 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
 	@Autowired
-	private BoardMapper boardMapper;
-	@Autowired
 	private ProductMapper productMapper; 
 	@Autowired
 	private PasswordEncoder pwencoder;
@@ -59,7 +57,6 @@ public class UserServiceImpl implements UserService {
 	@Override	
 	public void userDelete(String userid) {
 		// TODO Auto-generated method stub
-		boardMapper.userDelete(userid);
 		productMapper.cartDeleteById(userid);
 		productMapper.orderDeleteById(userid);
 		userMapper.userDelete(userid);
