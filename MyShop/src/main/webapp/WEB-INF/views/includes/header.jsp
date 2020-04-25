@@ -111,7 +111,7 @@
 		                <input class="form-control joinInput" name="username" id="username" type="text" placeholder="이름을 입력하세요" />
 	                </div>
 	                <div class="form-group">
-		                <label class="small mb-1" for="tel">전화번호</label>
+		                <label class="small mb-1" for="tel">휴대전화</label>
 		                <input class="form-control joinInput" name="tel" id="tel" type="tel" maxlength="13" placeholder="전화번호를 입력하세요" />
 	                </div>
   	                <div class="form-group">

@@ -20,6 +20,8 @@ function logout(){
 $(function() {
 //	이메일 정규식
 var regemail=/^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{1,5}$/;
+var regtel = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+
 //	아이디 한글 입력 방지
 	$("#joinid").on("blur keyup",function(){
 		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,''));
@@ -27,10 +29,22 @@ var regemail=/^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[
 	$("#loginid").on("blur keyup",function(){
 		$(this).val($(this).val().replace(/[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/g,''));
 	})
-//	전화번호 숫자만 입력
-	$("#tel").on("blur keyup",function(){
-		$(this).val($(this).val().replace(/[^0-9]/gi,''));
-	})	
+//	전화번호 자동 하이픈
+	$('#tel').keydown(function(event) {
+	    var key = event.charCode || event.keyCode || 0;
+	    $text = $(this);
+	    if (key !== 8 && key !== 9) {
+	        if ($text.val().length === 3) {
+	            $text.val($text.val() + '-');
+	        }
+	        if ($text.val().length === 8) {
+	            $text.val($text.val() + '-');
+	        }
+	    }
+	 
+	    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+	});
+
 //	이름 한글만 입력
 	$("#username").on("blur keyup",function(){
 		$(this).val($(this).val().replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g,''));
@@ -89,11 +103,19 @@ var regemail=/^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[
 			$("#joinpw").focus();
 			return false;
 		}
+		if(!regtel.exec($("#tel").val())){
+			alert("전화번호 양식이 틀렸습니다");
+			$("#tel").val("");
+			$("#tel").focus();
+			return false;
+		}
 		if(!regemail.exec($("#email").val())){
 			alert("이메일 양식이 틀렸습니다");
 			$("#email").val("");
+			$("#email").focus();
 			return false;
 		}
+
 		var addr = $("#addrView").val() + " " + $("#addrDetail").val();
 		$("#addr").val(addr);
 

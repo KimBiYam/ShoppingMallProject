@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <%@include file="../includes/header.jsp"%>
-<div class="container">
+<div class="container my-5">
 <div class="card mb-4" style="min-height: 1000px;">
 	<div class="card-header">
 		<i class="fas fa-table mr-1"></i>게시판</div>
