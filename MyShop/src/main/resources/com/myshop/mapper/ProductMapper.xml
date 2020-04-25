@@ -112,6 +112,10 @@
 		set amount=#{amount}
 		where cart_id=#{cartid}
 	</update>
+	<select id="cartGet" resultMap="cartMap">
+		select * from myshop_cart
+		where cart_id = #{cartid}
+	</select>
 	
 	<!-- 주문 -->
 	<insert id="order">

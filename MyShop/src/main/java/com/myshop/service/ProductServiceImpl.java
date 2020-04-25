@@ -94,6 +94,12 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		mapper.cartAmount(cartid, amount);
 	}
+	
+	@Override
+	public CartVO cartGet(int cartid) {
+		// TODO Auto-generated method stub
+		return mapper.cartGet(cartid);
+	}
 
 	@Override
 	@Transactional
@@ -139,5 +145,9 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		mapper.orderApproval(ordercode);		
 	}
+
+
+
+	
 
 }

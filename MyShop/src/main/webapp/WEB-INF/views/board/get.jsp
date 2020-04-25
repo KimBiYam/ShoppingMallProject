@@ -20,7 +20,7 @@
 	<div class="container my-5" style="min-height: 1000px">
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
-					<input type="hidden" name="type" value="${board.type }">
+					<input type="hidden" name="type" value="${board.btype }">
 					<input type="hidden" name="bnum " value="${board.bnum }"> 
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					<div class="form-group">
@@ -49,19 +49,19 @@
 						</c:if>
 						</sec:authorize>
 						<sec:authorize access="hasRole('ROLE_ADMIN')">
-						<c:if test="${board.type eq 1 }">
+						<c:if test="${board.btype eq 1 }">
 							<div class="col-md-2">
 								<a href="/myshop/board/update?bnum=${board.bnum }" class="btn btn-outline-primary btn-block">수정하기</a>
 							</div>
 						</c:if>
-						<c:if test="${board.type eq 2 || board.type eq 3 }">
+						<c:if test="${board.btype eq 2 || board.btype eq 3 }">
 							<div class="col-md-2">
-								<a href="/myshop/board/delete?bnum=${board.bnum }&type=${board.type}" class="btn btn-outline-danger btn-block" id="btnDelete">삭제하기</a>
+								<a href="/myshop/board/delete?bnum=${board.bnum }&type=${board.btype}" class="btn btn-outline-danger btn-block" id="btnDelete">삭제하기</a>
 							</div>
 						</c:if>
 						</sec:authorize>
 							<div class="col-md-2">
-								<a class="btn btn-outline-secondary btn-block" href="/myshop/board/list?type=${board.type }">리스트</a>
+								<a class="btn btn-outline-secondary btn-block" href="/myshop/board/list?btype=${board.btype }">리스트</a>
 							</div>
 						</div>
 					</div>

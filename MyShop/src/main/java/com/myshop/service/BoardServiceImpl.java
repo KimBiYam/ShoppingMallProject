@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myshop.domain.BoardVO;
+import com.myshop.domain.Criteria;
 import com.myshop.mapper.BoardMapper;
 
 @Service
@@ -20,8 +21,8 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.boardInsert(board);
 	}
 //	리스트
-	public List<BoardVO> boardList(int type){
-		return boardMapper.boardList(type);
+	public List<BoardVO> boardList(Criteria cri) {
+		return boardMapper.boardList(cri);
 	}
 //	상세보기
 	@Override
@@ -47,9 +48,9 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.viewcnt(bnum);
 	}
 	@Override
-	public void getcount(int type) {
+	public int getcount(Criteria cri) {
 		// TODO Auto-generated method stub
-		boardMapper.getcount(type);
+		return 0;
 	}
 
 }

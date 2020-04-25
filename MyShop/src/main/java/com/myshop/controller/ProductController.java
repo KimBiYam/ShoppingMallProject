@@ -36,7 +36,7 @@ public class ProductController {
 	@PostConstruct
 	public void initController() {
 		this.uploadPath = c.getRealPath("/resources/img");
-		System.out.println("uploadPath:"+uploadPath);
+		System.out.println("uploadPath:" + uploadPath);
 	}
 
 //	메인 페이지
@@ -197,15 +197,33 @@ public class ProductController {
 		return str;
 	}
 
+//	장바구니 재고 체크
+	@PreAuthorize("hasRole('ROLE_USER')")
+	@GetMapping("/cart/stock")
+	@ResponseBody
+	public String cartStock(String userid) {
+		String str = "";
+
+		List<CartVO> cartlist = service.cartList(userid);
+
+		for (int i = 0; i < cartlist.size(); i++) {
+			ProductVO product = service.productGet(cartlist.get(i).getProductid());
+
+			if (cartlist.get(i).getAmount() > product.getStock()) {
+				service.cartDelete(cartlist.get(i).getCartid());
+				str = "YES";
+			}
+		}
+
+		return str;
+	}
+
 //	장바구니 보기
 	@PreAuthorize("principal.username == #userid")
 	@GetMapping("/cart")
 	public void cart(@ModelAttribute("userid") String userid, Model model) {
+
 		List<CartVO> cartlist = service.cartList(userid);
-
-		for (int i = 0; i < cartlist.size(); i++) {
-
-		}
 
 		model.addAttribute("cartlist", cartlist);
 	}

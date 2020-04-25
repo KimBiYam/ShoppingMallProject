@@ -21,11 +21,11 @@ public interface ProductMapper {
 	
 	public void cartAdd(CartVO cart);
 	public CartVO cartCheck(String userid);
-	public CartVO cartGet(int cartid);
 	public List<CartVO> cartList(String userid);
 	public void cartDelete(int cartid);
 	public void cartDeleteById(String userid);
 	public void cartAmount(@Param("cartid") int cartid, @Param("amount") int amount);
+	public CartVO cartGet(int cartid);
 	
 	public void order(OrderVO order);
 	public void orderAmount(CartVO cart);

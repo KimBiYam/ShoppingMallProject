@@ -50,7 +50,8 @@
 							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 							<input type="hidden" id="cartid" name="cartid">
 							<input type="hidden" name="userid" value='<sec:authentication property="principal.username"/>'>
-							<select id="amount" name="amount" data-width="fit" class="selectpicker" data-size="5">						
+							<select id="amount" name="amount" data-width="fit" class="selectpicker" data-size="5">
+								<option>선택</option>
 							<c:forEach var="i" begin="1" end="${cartlist.stock }">
 								<option value="${i }">${i }</option>
 							</c:forEach>
@@ -76,7 +77,19 @@
 	<!-- /.container -->
 	<jsp:include page="../includes/footer.jsp"></jsp:include>
 
-<script type="text/javascript">
+	<script type="text/javascript">
+	$(function(){
+		var userid = '<sec:authentication property="principal.username"/>';
+		$.get("/myshop/product/cart/stock",
+				{"userid" : userid},
+				function(data){
+					if(data == "YES"){
+						alert('                장바구니에 넣어둔 제품의 수량이 부족하여 \n                        장바구니에서 제외되었습니다');
+						location.href = "/myshop/product/cart?userid="+userid;						
+						}
+					}
+				)
+		})
 	function cartAmount(cartid){
 			$("#cartid").val(cartid);
 			$("#amountForm").submit();
@@ -96,8 +109,8 @@
 	}
 	
 	
-</script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 </body>
 
 </html>

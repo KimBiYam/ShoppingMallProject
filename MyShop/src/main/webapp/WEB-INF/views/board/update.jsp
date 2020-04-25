@@ -20,14 +20,14 @@
 	<div class="container my-5" style="min-height: 1000px">
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
-			<c:if test="${board.type eq 1 }">
+			<c:if test="${board.btype eq 1 }">
 				<form id="boardUpdate" action="/myshop/board/admin/update" method="post">
 			</c:if>
-			<c:if test="${board.type eq 2 || board.type eq 3 }">
+			<c:if test="${board.btype eq 2 || board.btype eq 3 }">
 				<form id="boardUpdate" action="/myshop/board/update" method="post">
 			</c:if>
 					<input type="hidden" name="bnum" value="${board.bnum }">
-					<input type="hidden" name="type" value="${board.type }">
+					<input type="hidden" name="btype" value="${board.btype }">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					<div class="form-group">
 						<label class="small mb-1" for="title">제목</label> <input class="form-control py-4" name="title" id="title" type="text" value="${board.title }" placeholder="제목을 입력하세요" />
@@ -49,18 +49,18 @@
 							<div class="col-md-2">
 								<button class="btn btn-outline-primary btn-block" id="btnUpdate">수정하기</button>
 							</div>
-							<c:if test="${board.type eq 1 }">
+							<c:if test="${board.btype eq 1 }">
 							<div class="col-md-2">
 								<button type="button" class="btn btn-outline-danger btn-block" id="btnAdminDelete">삭제하기</button>
 							</div>
 							</c:if>
-							<c:if test="${board.type eq 2 || board.type eq 3 }">
+							<c:if test="${board.btype eq 2 || board.btype eq 3 }">
 							<div class="col-md-2">
 								<button type="button" class="btn btn-outline-danger btn-block" id="btnDelete">삭제하기</button>
 							</div>
 							</c:if>
 							<div class="col-md-2">
-								<a class="btn btn-outline-secondary btn-block" href="/myshop/board/list?type=${board.type }">리스트</a>
+								<a class="btn btn-outline-secondary btn-block" href="/myshop/board/list?btype=${board.btype }">리스트</a>
 							</div>
 						</div>
 					</div>
@@ -73,12 +73,12 @@
 		$(function() {
 			$("#btnAdminDelete").on("click",function(){
 				if(confirm("정말 삭제하시겠습니까?")){
-					location.href="/myshop/board/admin/delete?bnum=${board.bnum }&type=${board.type}";
+					location.href="/myshop/board/admin/delete?bnum=${board.bnum }&btype=${board.btype}";
 					}								
 				});
 			$("#btnDelete").on("click",function(){
 				if(confirm("정말 삭제하시겠습니까?")){
-					location.href="/myshop/board/delete?bnum=${board.bnum }&type=${board.type}";
+					location.href="/myshop/board/delete?bnum=${board.bnum }&btype=${board.btype}";
 					}								
 				});
 			$("#btnUpdate").on("click", function() {

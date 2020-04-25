@@ -19,13 +19,13 @@
 	<div class="container my-5" style="min-height: 1000px">
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
-			<c:if test="${type eq 1 }">
+			<c:if test="${btype eq 1 }">
 				<form id="boardInsert" action="/myshop/board/admin/insert" method="post">
 			</c:if>
-			<c:if test="${type eq 2 || type eq 3 }">
+			<c:if test="${btype eq 2 || btype eq 3 }">
 				<form id="boardInsert" action="/myshop/board/insert" method="post">
 			</c:if>
-					<input type="hidden" name="type" value="${type }">
+					<input type="hidden" name="btype" value="${btype }">
 					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 					<div class="form-group">
 						<label class="small mb-1" for="title">제목</label> <input class="form-control py-4" name="title" id="title" type="text"
@@ -53,7 +53,7 @@
 								<button type="button" class="btn btn-outline-primary btn-block" id="btnWrite">작성</button>
 							</div>
 							<div class="col-md-2">
-								<a class="btn btn-outline-secondary btn-block" href="/myshop/board/list?type=${type }">리스트</a>
+								<a class="btn btn-outline-secondary btn-block" href="/myshop/board/list?btype=${btype }">리스트</a>
 							</div>
 						</div>
 					</div>

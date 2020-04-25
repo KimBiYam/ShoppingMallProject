@@ -24,6 +24,7 @@ public interface ProductService {
 	public void cartDelete(int cartid);
 	public void cartDeleteById(String userid);
 	public void cartAmount(@Param("cartid") int cartid, @Param("amount") int amount);
+	public CartVO cartGet(int cartid);
 
 	public void order(OrderVO order, CartVO cart);
 	public List<OrderVO> orderList();
@@ -32,6 +33,7 @@ public interface ProductService {
 	public void orderCancel(String ordercode);
 	public void orderCancelAmount(int productid, int amount);
 	public void orderApproval(String ordercode);
+	
 	
 	
 	
