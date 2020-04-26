@@ -42,10 +42,11 @@
 		</table>	
 		<form id="orderForm" action="/myshop/product/order" method="post">
 	            <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+	            <input type="hidden" name="userid" value='<sec:authentication property="principal.username"/>'>
 	            <input type="hidden" name="addr" id="orderAddr">
    	                <div class="form-group">
-		                <label class="small mb-1" for="orderUsername">주문자명</label>
-		                <input class="form-control" id="orderUserid" name="userid" type="text" value='<sec:authentication property="principal.username"/>' readonly="readonly"/>
+		                <label class="small mb-1" for="orderName">주문자명</label>
+		                <input class="form-control" id="orderName" name="ordername" type="text" />
 	                </div>
 	                <div class="form-group">
 		                <label class="small mb-1" for="orderTel">휴대전화</label>
@@ -85,7 +86,13 @@
 <script>
 	// 카카오 주소 API 팝업
 	$(function(){
+		var regtel = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 		$("#btnOrder").on("click",function(){
+			if($("#orderName").val()==""){
+				alert("주문자명을 입력하세요");
+				$("#orderName").focus();
+				return false;
+				}
 			if($("#orderTel").val()==""){
 				alert("전화번호를 입력하세요");
 				$("#orderTel").focus();
@@ -100,6 +107,12 @@
 				$("#orderAddrDetail").focus();
 				return false;
 				}
+			if(!regtel.exec($("#orderTel").val())){
+				alert("전화번호 양식이 틀렸습니다");
+				$("#orderTel").val("");
+				$("#orderTel").focus();
+				return false;
+			}
 			var addr = $("#orderAddrView").val() + " " + $("#orderAddrDetail").val();
 			$("#orderAddr").val(addr);		
 			$("#orderForm").submit();
@@ -165,10 +178,19 @@
 							}
 						}).open();
 			});
-		// 전화번호 숫자만 입력
-		$("#orderTel").on("blur keyup",function(){
-			$(this).val($(this).val().replace(/[^0-9]/gi,''));
-		})	
+		//전화번호 자동 하이픈
+		$('#orderTel').keydown(function(event) {
+	    var key = event.charCode || event.keyCode || 0;
+	    $text = $(this);
+	    if (key !== 8 && key !== 9) {
+	        if ($text.val().length === 3) {
+	            $text.val($text.val() + '-');
+	        }
+	        if ($text.val().length === 8) {
+	            $text.val($text.val() + '-');
+	        }
+	    }
+		});
 		
 	});
 </script>

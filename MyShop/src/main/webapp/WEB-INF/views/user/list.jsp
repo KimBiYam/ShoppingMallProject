@@ -12,12 +12,13 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>게시판</title>
+<title>회원 관리</title>
 </head>
 <body>
 	<jsp:include page="../includes/header.jsp" />
 	<!-- Page Content -->
-	<div class="container" style="min-height: 1000px;">
+	<div class="mx-5" style="min-height: 1000px;">
+		<h1 class="text-center my-5">회원 관리</h1>
 		<div class="card my-5">
 			<div class="card-header">
 				<div class="card-body">
@@ -31,8 +32,8 @@
 									<th style="width: 10%">이메일</th>
 									<th style="width: 10%">우편번호</th>
 									<th style="width: 25%">주소</th>
-									<th style="width: 15%">가입일</th>
-									<th style="width: 10%">삭제</th>
+									<th>가입일</th>
+									<th>삭제</th>
 								</tr>
 								<c:forEach items="${user }" var="user">
 									<tr>

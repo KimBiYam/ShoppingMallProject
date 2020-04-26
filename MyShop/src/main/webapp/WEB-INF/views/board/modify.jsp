@@ -6,7 +6,7 @@
 
 <%@include file="../includes/header.jsp"%>
 <div id="layoutSidenav_content">
-                    <div class="container">
+                    <div class="container" style="min-height: 1000px;">
                         <div class="row justify-content-center">
                             <div class="col-lg-9 my-5">
                                         <form action="/myshop/board/modify" method="post">

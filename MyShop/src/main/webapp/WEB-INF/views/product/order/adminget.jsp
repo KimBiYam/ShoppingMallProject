@@ -12,14 +12,14 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<title>주문내역</title>
+<title>주문 내역</title>
 </head>
 <body>
 	<jsp:include page="../../includes/header.jsp" />
 	<div class="container" style="min-height: 1000px">
-		<h1 class="my-5 text-center">주문내역</h1>
+		<h1 class="my-5 text-center">주문 내역</h1>
 		<div class="text-right">
-		<p>주문자 : ${orderlist[0].userid }</p>
+		<p>주문자명 : ${orderlist[0].ordername }</p>
 		<p>전화번호 : ${orderlist[0].tel }</p>
 		<p>배송 주소지 : ${orderlist[0].addr }</p>
 		<p>총액 : ${total } <i class="fas fa-won-sign"></i></p>	
@@ -47,7 +47,7 @@
 	<c:if test="${orderlist[0].approval eq '승인안됨' }">
 	<div class="text-right mb-5">
 		<button id="btnApproval" type="button" class="btn btn-outline-info">승인</button>
-		<button id="btnCancel" type="button" class="btn btn-outline-danger">주문취소</button>
+		<button id="btnCancel" type="button" class="btn btn-outline-danger">주문 취소</button>
 	</div>
 	</c:if>
 	</div>

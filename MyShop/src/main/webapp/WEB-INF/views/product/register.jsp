@@ -19,6 +19,7 @@
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
 			<div class="text-center">
+			<h1>상품 등록</h1>
 			<img id="productimg" width="300px">
 			</div>
 				<form id="registerForm" action="/myshop/product/register" method="post" enctype="multipart/form-data">

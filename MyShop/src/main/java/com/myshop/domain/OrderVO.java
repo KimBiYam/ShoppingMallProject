@@ -19,5 +19,6 @@ public class OrderVO {
 	private Date orderdate;
 	private int rownum;
 	private int productid;
+	private String ordername;
 	
 }

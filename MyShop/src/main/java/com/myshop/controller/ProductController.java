@@ -56,12 +56,6 @@ public class ProductController {
 		model.addAttribute("list", list);
 	}
 
-//	카테고리 등록 페이지
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/category/register")
-	public void categoryRegister() {
-	}
-
 //	카테고리 등록
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/category/register")

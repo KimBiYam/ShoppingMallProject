@@ -51,7 +51,6 @@
 							<input type="hidden" id="cartid" name="cartid">
 							<input type="hidden" name="userid" value='<sec:authentication property="principal.username"/>'>
 							<select id="amount" name="amount" data-width="fit" class="selectpicker" data-size="5">
-								<option>선택</option>
 							<c:forEach var="i" begin="1" end="${cartlist.stock }">
 								<option value="${i }">${i }</option>
 							</c:forEach>

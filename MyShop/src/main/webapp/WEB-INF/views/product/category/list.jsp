@@ -40,9 +40,21 @@
 							</thead>
 						</table>
 					</div>
-						<div class="float-right">
-							<a class="btn btn-outline-primary" href="/myshop/product/category/register">카테고리 등록</a>					
+					<form id="registerForm" action="/myshop/product/category/register" method="post">
+					<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+					<div class="form-group">
+						<label class="mb-1" for="categoryname">카테고리 등록</label>
+						<input class="form-control py-4" name="categoryname" id="categoryname" type="text"
+							placeholder="카테고리 이름을 입력하세요" />
+					</div>
+					<div class="form-group mt-4 mb-0">
+						<div class="form-row justify-content-center">
+							<div class="col-md-2">
+								<button type="button" class="btn btn-outline-primary btn-block" id="btnRegister">등록</button>
+							</div>
 						</div>
+					</div>
+				</form>
 				</div>
 			</div>
 
@@ -50,12 +62,24 @@
 	</div>
 	<!-- /.container -->
 	<script type="text/javascript">
-		function categoryDelete(categoryname){
-			if(confirm("정말 삭제 하시겠습니까?")){
-				location.href="/myshop/product/category/delete?categoryname="+categoryname;
+		$(function() {
+			$("#btnRegister").on("click", function() {
+				if ($("#categoryname").val() == "") {
+					alert("카테고리 이름을 입력하세요");
+					$("#categoryname").focus();
+					return false;
 				}
+				$("#registerForm").submit();
+			});
+		});
+		function categoryDelete(categoryname) {
+			if (confirm("정말 삭제 하시겠습니까?")) {
+				location.href = "/myshop/product/category/delete?categoryname="
+						+ categoryname;
 			}
+		}
 	</script>
+
 	<jsp:include page="../../includes/footer.jsp"></jsp:include>
 </body>
 

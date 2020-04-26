@@ -44,18 +44,18 @@
           <sec:authorize access="isAuthenticated()">
           <sec:authorize access='hasRole("ROLE_USER")'>
           <li class="nav-item">
-            <a class="nav-link" href="/myshop/user/update"><i class="far fa-address-book"></i> 마이페이지</a>
+            <a class="nav-link" href="/myshop/user/update"><i class="far fa-address-book"></i> 마이 페이지</a>
           </li>    
           <li class="nav-item">
           <a href="/myshop/product/cart?userid=<sec:authentication property="principal.username"/>" class="nav-link"><i class="fas fa-shopping-cart"></i> 장바구니</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/myshop/product/order/list?userid=<sec:authentication property="principal.username"/>"><i class="fas fa-clipboard-list"></i> 주문내역</a>
+            <a class="nav-link" href="/myshop/product/order/list?userid=<sec:authentication property="principal.username"/>"><i class="fas fa-clipboard-list"></i> 주문 내역</a>
           </li>    
           </sec:authorize>
           <sec:authorize access='hasRole("ROLE_ADMIN")'>
           <li class="nav-item">
-            <a class="nav-link" href="/myshop/admin/list"><i class="fas fa-address-card"></i> 회원관리</a>
+            <a class="nav-link" href="/myshop/admin/list"><i class="fas fa-address-card"></i> 회원 관리</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/myshop/product/category/list"><i class="fas fa-tags"></i> 카테고리 관리</a>
@@ -64,7 +64,7 @@
             <a class="nav-link" href="/myshop/product/order/admin/list"><i class="fas fa-clipboard-list"></i> 주문 관리</a>
           </li>          
           <li class="nav-item">
-            <a class="nav-link" href="/myshop/product/register"><i class="fas fa-balance-scale"></i> 상품등록</a>
+            <a class="nav-link" href="/myshop/product/register"><i class="fas fa-balance-scale"></i> 상품 등록</a>
           </li>          
           </sec:authorize>
           <li class="nav-item">          

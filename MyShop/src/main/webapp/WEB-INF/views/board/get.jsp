@@ -5,7 +5,7 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <%@include file="../includes/header.jsp"%>
-                    <div class="container">
+                    <div class="container" style="min-height: 1000px;">
                         <div class="row justify-content-center">
                             <div class="col-lg-9 my-5">
                                             <div class="form-group">

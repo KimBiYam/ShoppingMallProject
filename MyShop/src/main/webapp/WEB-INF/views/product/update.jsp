@@ -19,6 +19,7 @@
 		<div class="row justify-content-center" style="min-height: 1000px">
 			<div class="col-lg-9 my-5">
 			<div class="text-center">
+			<h1>상품 수정</h1>
 			<img id="productimg" width="300px" src="${product.src }">
 			</div>
 				<form id="updateForm" action="/myshop/product/update" method="post" enctype="multipart/form-data">

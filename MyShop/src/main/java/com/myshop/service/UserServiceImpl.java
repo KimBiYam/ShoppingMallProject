@@ -9,12 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.domain.AuthVO;
 import com.myshop.domain.UserVO;
-import com.myshop.mapper.BoardMapper;
 import com.myshop.mapper.ProductMapper;
 import com.myshop.mapper.UserMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 
 @Service
 @AllArgsConstructor
@@ -25,6 +23,7 @@ public class UserServiceImpl implements UserService {
 	private ProductMapper productMapper; 
 	@Autowired
 	private PasswordEncoder pwencoder;
+	
 	
 	@Override
 	public void userJoin(UserVO user, AuthVO auth) {
@@ -57,7 +56,7 @@ public class UserServiceImpl implements UserService {
 	@Override	
 	public void userDelete(String userid) {
 		// TODO Auto-generated method stub
-		productMapper.cartDeleteById(userid);
+		productMapper.cartDeleteById(userid);		
 		productMapper.orderDeleteById(userid);
 		userMapper.userDelete(userid);
 	}

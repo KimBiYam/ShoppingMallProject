@@ -22,6 +22,7 @@
 			<table class="table">
 				<tr>
 					<th>주문번호</th>
+					<th>주문자명</th>
 					<th>주문일</th>
 					<th>배송 주소지</th>
 					<th>전화번호</th>
@@ -30,6 +31,7 @@
 				<c:forEach items="${orderlist }" var="orderlist">
 					<tr>
 						<td><a href="/myshop/product/order/admin/get?ordercode=${orderlist.ordercode }">${orderlist.rownum }</a></td>
+						<td>${orderlist.ordername }</td>
 						<td><fmt:formatDate value="${orderlist.orderdate }" /></td>
 						<td>${orderlist.addr }</td>
 						<td>${orderlist.tel }</td>
