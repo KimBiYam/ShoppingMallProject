@@ -26,7 +26,8 @@ import com.myshop.service.UserService;
 @RequestMapping("/user/*")
 public class UserController {
 	@Autowired
-	UserService service;
+	private UserService service;
+
 
 //	È¸¿ø°¡ÀÔ
 	@PostMapping("/join")
@@ -70,18 +71,19 @@ public class UserController {
 		service.userUpdate(user);
 		return "redirect:/";
 	}
-	
+
 //	È¸¿ø Å»Åð
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/delete")
 	public String delete(Principal principal, HttpServletRequest req, HttpServletResponse res) throws Exception {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		service.userDelete(principal.getName());
-		if(auth != null) {
+		if (auth != null) {
 			new SecurityContextLogoutHandler().logout(req, res, auth);
 			new CookieClearingLogoutHandler().logout(req, res, auth);
 		}
 		return "redirect:/";
 	}
-	
+
+
 }

@@ -38,5 +38,11 @@
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 	</beans:bean>
 	
+	<beans:bean id="naverLoginBO" class="com.myshop.oauth.NaverLoginBO">
+	
+	
+	</beans:bean>
+	
+	
 
 </beans:beans>

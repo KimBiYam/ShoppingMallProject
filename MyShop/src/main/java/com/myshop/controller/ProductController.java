@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.myshop.domain.CartVO;
 import com.myshop.domain.OrderVO;
 import com.myshop.domain.ProductVO;
+import com.myshop.oauth.NaverLoginBO;
 import com.myshop.service.ProductService;
 
 @Controller
@@ -30,6 +32,9 @@ public class ProductController {
 	ProductService service;
 	@Autowired
 	ServletContext c;
+	@Autowired
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
 	private String uploadPath;
 
 //	컨트롤러 초기화 시 실제 서버의 경로를 받아와 이미지 저장 경로를 지정
@@ -41,11 +46,20 @@ public class ProductController {
 
 //	메인 페이지
 	@GetMapping("/home")
-	public void home(String category, Model model) {
+	public void home(String category, Model model, HttpSession session) {
 		List<String> categorys = service.categorylist();
 		List<ProductVO> products = service.productList(category);
 		model.addAttribute("categorys", categorys);
 		model.addAttribute("products", products);
+
+		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+		System.out.println("네이버:" + naverAuthUrl);
+		// 네이버
+		model.addAttribute("url", naverAuthUrl);
+
 	}
 
 //	카테고리 리스트
