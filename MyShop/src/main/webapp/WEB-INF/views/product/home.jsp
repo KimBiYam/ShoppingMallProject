@@ -15,10 +15,6 @@
 <jsp:include page="../includes/header.jsp"/>
 <jsp:include page="../includes/productsidebar.jsp"/>
       <div class="col-lg-9">
-      <c:if test="${sessionId != null }">
-      	<h2> 네이버 아이디 로그인 성공하셨습니다!! </h2>
-		<h3>'${sessionId}' 님 환영합니다! </h3>
-      </c:if>
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
