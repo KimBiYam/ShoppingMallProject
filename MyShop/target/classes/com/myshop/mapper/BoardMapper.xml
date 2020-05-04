@@ -91,4 +91,21 @@
 		update myshop_board set replycnt = replycnt + #{amount} where bno = #{bno}
 	</update>
 	
+	<update id="updateName">
+		update myshop_board
+		set name = #{username}
+		where name = #{username}
+	</update>
+	
+	<delete id="deleteUser">
+		delete from myshop_board		
+		where writer = #{userid}
+	</delete>
+	
+	<select id="listById" resultType="Long">
+		select bno from myshop_board
+		where writer = #{userid}
+	</select>
+	
+	
 </mapper>

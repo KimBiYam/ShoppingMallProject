@@ -22,4 +22,7 @@ public interface BoardMapper {
 	public int getTotalCount(Criteria cri);
 	public void viewcnt(Long bno);
 	public void updateReplyCnt(@Param("bno") Long bno, @Param("amount") int amount);
+	public void updateName(String username);
+	public void deleteUser(String userid);
+	public List<Long> listById(String userid);
 }

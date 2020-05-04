@@ -25,5 +25,9 @@ public interface ReplyMapper {
 	
 	public int deleteByBno(Long bno);
 	
+	public void updateName(String username);
+	
+	public void deleteUser(String userid);
+	
 
 }

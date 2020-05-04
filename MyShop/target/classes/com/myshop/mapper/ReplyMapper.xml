@@ -47,6 +47,17 @@
 		delete from myshop_reply
 		where bno = #{bno}
 	</delete>
+	
+	<update id="updateName">
+		update myshop_reply
+		set username = #{value}
+		where name = #{value}
+	</update>
+	
+	<delete id="deleteUser">
+		delete from myshop_reply
+		where replyer = #{value}
+	</delete>
 
 
 
