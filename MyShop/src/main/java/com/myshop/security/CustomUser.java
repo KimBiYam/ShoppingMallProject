@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import com.myshop.domain.AuthVO;
 import com.myshop.domain.UserVO;
 
 import lombok.Getter;

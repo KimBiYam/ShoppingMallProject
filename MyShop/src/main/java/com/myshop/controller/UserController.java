@@ -1,6 +1,5 @@
 package com.myshop.controller;
 
-import java.io.IOException;
 import java.security.Principal;
 
 import javax.servlet.http.HttpServletRequest;

@@ -10,7 +10,7 @@
 	
 		<security:http>
 		
-			<security:form-login login-page="/"/>
+			<security:form-login login-page="/"/>		
 			
 			<security:logout logout-url="/logout" logout-success-url="/" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
 			

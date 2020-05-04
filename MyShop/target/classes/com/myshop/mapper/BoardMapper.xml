@@ -28,8 +28,8 @@
 			resultType="long">
 			select MYSHOP_BOARD_SEQ.nextval from dual
 		</selectKey>
-		insert into myshop_board(bno,title,content,writer)
-		values (#{bno},#{title},#{content},#{writer})
+		insert into myshop_board(bno,title,content,writer,name)
+		values (#{bno},#{title},#{content},#{writer},#{name})
 	</insert>
 	
 	<select id="list" resultType="com.myshop.domain.BoardVO">
@@ -40,11 +40,11 @@
 	<select id="getListWithPaging" resultType="com.myshop.domain.BoardVO">
 		<![CDATA[
 			select
-				bno, title, content, writer, regDate, viewcnt, replycnt
+				bno, title, content, writer, regDate, viewcnt, replycnt, name
 			from
 				(
 				select /*+INDEX_DESC(myshop_board myshop_board_pk) */
-					rownum rn, bno, title, content, writer, regDate, viewcnt, replycnt
+					rownum rn, bno, title, content, writer, regDate, viewcnt, replycnt, name
 				from
 					myshop_board
 				where

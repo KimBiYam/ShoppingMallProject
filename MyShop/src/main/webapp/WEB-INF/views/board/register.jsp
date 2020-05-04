@@ -11,13 +11,14 @@
                             <div class="col-lg-9 my-5">
                                         <form id="boardRegister" action="/myshop/board/register" method="post">
                                         <input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
+                                        <input type="hidden" name="writer" value='<sec:authentication property="principal.username"/>'>
                                             <div class="form-group">
                                             	<label class="small mb-1" for="title">제목</label>
                                             	<input class="form-control py-4" name="title" id="title" type="text" placeholder="제목을 입력하세요" />
                                            	</div>
 	                                        <div class="form-group">
-	                                        	<label class="small mb-1" for="writer">작성자</label>
-	                                        	<input class="form-control py-4" name="writer" id="writer" type="text" value='<sec:authentication property="principal.username"/>' readonly="readonly" />
+	                                        	<label class="small mb-1" for="name">작성자</label>
+	                                        	<input class="form-control py-4" name="name" id="name" type="text" value="${name }" readonly="readonly" />
                                         	</div>
                      						<div class="form-group">
 												<label class="small mb-1" for="content">내용</label>

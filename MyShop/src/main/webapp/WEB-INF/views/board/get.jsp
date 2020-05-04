@@ -2,76 +2,91 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="sec"
+	uri="http://www.springframework.org/security/tags"%>
 
 <%@include file="../includes/header.jsp"%>
-                    <div class="container" style="min-height: 1000px;">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-9 my-5">
-                                            <div class="form-group">
-                                            	<label class="small mb-1" for="title">제목</label>
-                                            	<input class="form-control py-4" name="title" id="title" type="text" value="${board.title }" disabled="disabled" />
-                                           	</div>
-	                                        <div class="form-group">
-	                                        	<label class="small mb-1" for="writer">작성자</label>
-	                                        	<input class="form-control py-4" name="writer" id="writer" type="text" value="${board.writer }" disabled="disabled" />
-                                        	</div>
-                                        	<div class="form-group">
-	                                        	<label class="small mb-1" for="writer">작성일</label>
-	                                        	<input class="form-control py-4" type="text" value='<fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}" />' disabled="disabled" />
-                                        	</div>
-                     						<div class="form-group">
-												<label class="small mb-1" for="content">내용</label>
-												<textarea class="form-control" rows="5" name="content" id="content" disabled="disabled">${board.content }</textarea>
-											</div>
-                                            <div class="form-group mt-4 mb-0">
-                           	                  <div class="row justify-content-center">
-                           	                  <sec:authentication property="principal" var="pinfo"/>
-                           	                  	<sec:authorize access="isAuthenticated()">
-                           	                  	<c:if test="${pinfo.username eq board.writer }">
-                                                <div class="col-md-2">
-                                   	    	     	<button class="btn btn-outline-primary btn-block" data-oper='modify'>수정</button>
-                                            	</div>
-                                            	</c:if>
-                                            	</sec:authorize>
-                                   	            <div class="col-md-2">
-                                          		  	<button class="btn btn-outline-secondary btn-block" data-oper='list'>리스트</button>
-                                       		  	</div>
-                                              </div>
-                                           	</div>
-                                    </div>
-                            </div>
-                            <div class="row justify-content-center">
-								<div class="col-lg-9 my-5">
-								<!-- /.panel -->
-								<div class="panel panel-default">
-								<div class="panel-heading">
-									<sec:authorize access="isAuthenticated()">
-									<button id='addReplyBtn' class='btn btn-primary btn-xs float-right'>댓글 쓰기</button>
-									<br><br><br>
-			                        <div class="dropdown-divider"></div>
-									</sec:authorize>	
-								</div>
-								<!-- /.panel-heading -->
-								<div class="panel-body">
-									<ul class="chat">
-									</ul>
-								<!-- ./ end ul -->
-								</div>
-								<!-- /.panel .chat-panel -->
-			<div class="panel-footer"></div>
+<div class="container" style="min-height: 1000px;">
+	<div class="row justify-content-center">
+		<div class="col-lg-9 my-5">
+			<input type="hidden" name="writer" id="writer"
+				value="${board.writer }">
+			<div class="form-group">
+				<label class="small mb-1" for="title">제목</label> <input
+					class="form-control py-4" name="title" id="title" type="text"
+					value="${board.title }" disabled="disabled" />
+			</div>
+			<div class="form-group">
+				<label class="small mb-1" for="name">작성자</label> <input
+					class="form-control py-4" name="name" id="name" type="text"
+					value="${board.name }" disabled="disabled" />
+			</div>
+			<div class="form-group">
+				<label class="small mb-1" for="writer">작성일</label> <input
+					class="form-control py-4" type="text"
+					value='<fmt:formatDate pattern="yyyy-MM-dd" value="${board.regDate}" />'
+					disabled="disabled" />
+			</div>
+			<div class="form-group">
+				<label class="small mb-1" for="content">내용</label>
+				<textarea class="form-control" rows="5" name="content" id="content"
+					disabled="disabled">${board.content }</textarea>
+			</div>
+			<div class="form-group mt-4 mb-0">
+				<div class="row justify-content-center">
+					<sec:authentication property="principal" var="pinfo" />
+					<sec:authorize access="isAuthenticated()">
+						<c:if test="${pinfo.username eq board.writer }">
+							<div class="col-md-2">
+								<button class="btn btn-outline-primary btn-block"
+									data-oper='modify'>수정</button>
+							</div>
+						</c:if>
+					</sec:authorize>
+					<div class="col-md-2">
+						<button class="btn btn-outline-secondary btn-block"
+							data-oper='list'>리스트</button>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
-	<!-- ./ end row -->
+	<div class="row justify-content-center">
+		<div class="col-lg-9 my-5">
+			<!-- /.panel -->
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<sec:authorize access="isAuthenticated()">
+						<button id='addReplyBtn'
+							class='btn btn-primary btn-xs float-right'>댓글 쓰기</button>
+						<br>
+						<br>
+						<br>
+						<div class="dropdown-divider"></div>
+					</sec:authorize>
+				</div>
+				<!-- /.panel-heading -->
+				<div class="panel-body">
+					<ul class="chat">
+					</ul>
+					<!-- ./ end ul -->
+				</div>
+				<!-- /.panel .chat-panel -->
+				<div class="panel-footer"></div>
+			</div>
+		</div>
+		<!-- ./ end row -->
 	</div>
 </div>
-     				    <form id="operForm" action="/myshop/board/modify" method="get">
-                        <input type="hidden" id="bno" name="bno" value='<c:out value="${board.bno }"/>'>
-                        <input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum }"/>'>
-                        <input type="hidden" name="amount" value='<c:out value="${cri.amount }"/>'>
-          				<input type="hidden" name="type" value='<c:out value="${cri.type }"/>'>
-						<input type="hidden" name="keyword" value='<c:out value="${cri.keyword }"/>'>
-                        </form>
+<form id="operForm" action="/myshop/board/modify" method="get">
+	<input type="hidden" id="bno" name="bno"
+		value='<c:out value="${board.bno }"/>'> <input type="hidden"
+		name="pageNum" value='<c:out value="${cri.pageNum }"/>'> <input
+		type="hidden" name="amount" value='<c:out value="${cri.amount }"/>'>
+	<input type="hidden" name="type" value='<c:out value="${cri.type }"/>'>
+	<input type="hidden" name="keyword"
+		value='<c:out value="${cri.keyword }"/>'>
+</form>
 <!-- Modal -->
 <div class="modal fade" id="replyModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -83,28 +98,29 @@
 				<h4 class="modal-title" id="myModalLabel">댓글</h4>
 			</div>
 			<div class="modal-body">
+				<input type="hidden" name="replyer" id="replyer" value="replyer">
 				<div class="form-group">
 					<label>내용</label> <input class="form-control" name='reply'
 						value='New Reply!!!!'>
 				</div>
-				<div class="form-group">							
-					<label>작성자</label>
-					 <input class="form-control" name='replyer' id="replyer"
-						value='replyer' disabled="disabled">
+				<div class="form-group">
+					<label>작성자</label> <input class="form-control" name='name'
+						id="replyName" value=${name } disabled="disabled">
 				</div>
 				<div class="form-group">
-					<label>작성일</label> <input class="form-control"
-						name='replyDate' value='2018-01-01 13:13'>
+					<label>작성일</label> <input class="form-control" name='replyDate'
+						value='2018-01-01 13:13'>
 				</div>
 			</div>
 			<div class="modal-footer">
-			<sec:authorize access="isAuthenticated()">
-				<button id='modalModBtn' type="button" class="btn btn-warning">수정하기</button>
-				<button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제하기</button>
-				<button id='modalRegisterBtn' type="button" class="btn btn-primary">글쓰기</button>
-			</sec:authorize>
-				<button id='modalCloseBtn' type="button" class="btn btn-outline-secondary">닫기</button>
-			
+				<sec:authorize access="isAuthenticated()">
+					<button id='modalModBtn' type="button" class="btn btn-warning">수정하기</button>
+					<button id='modalRemoveBtn' type="button" class="btn btn-danger">삭제하기</button>
+					<button id='modalRegisterBtn' type="button" class="btn btn-primary">글쓰기</button>
+				</sec:authorize>
+				<button id='modalCloseBtn' type="button"
+					class="btn btn-outline-secondary">닫기</button>
+
 			</div>
 		</div>
 		<!-- /.modal-content -->
@@ -112,10 +128,10 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-					
-					
-					
-					
+
+
+
+
 <script type="text/javascript" src="/myshop/resources/js/reply.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -151,7 +167,7 @@
 												for (var i = 0, len = list.length || 0; i < len; i++) {
 													str += "<li class='left clearfix' data-rno='"+list[i].rno+"'>";
 													str += "<div><div class='header'><strong class='primary-font'>["+eval(1+i)+"]"
-															+list[i].replyer+"</strong>";
+															+list[i].name+"</strong>";
 													str += "<small class='float-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small></div>";
 													str += "<p>"+list[i].reply+"</p></div></li>";
 													str += "<div class='dropdown-divider'></div>";
@@ -230,6 +246,7 @@
 						var modal = $("#replyModal");
 						var modalInputReply = modal.find("input[name='reply']");
 						var modalInputReplyer = modal.find("input[name='replyer']");
+						var modalInputReplyName = $("#replyName");
 						var modalInputReplyDate = modal.find("input[name='replyDate']");
 
 						var modalModBtn = $("#modalModBtn");													
@@ -239,11 +256,14 @@
 						//alert(bnoValue)
 						
 						var replyer = null;
+						var replyName = null;
 
  						<sec:authorize access="isAuthenticated()">
 
 						replyer = '<sec:authentication property="principal.username"/>';
-
+						replyer = replyer.replace('&#95;','_');
+						replyName = "${name }";
+						
 						</sec:authorize>
 
 						var csrfHeaderName = "${_csrf.headerName}";
@@ -261,6 +281,7 @@
 						$("#addReplyBtn").on("click", function(e) {
 							modal.find("input").val("");
 							modal.find("input[name='replyer']").val(replyer);
+							modal.find("#replyName").val(replyName);
 							modalInputReplyDate.closest("div").hide();
 							modal.find("button[id !='modalCloseBtn']").hide();		
 												
@@ -274,8 +295,9 @@
 								return false;
 								}
 							var reply = {
-								reply : modalInputReply.val(),
+								reply : modalInputReply.val(),								
 								replyer : replyer,
+								name : replyName,								
 								bno : bnoValue
 							};
 							replyService.add(reply, function(result) {
@@ -293,17 +315,19 @@
 								modalInputReplyDate.closest("div").show();
 								modalInputReply.val(reply.reply);
 								modalInputReplyer.val(reply.replyer);
+								modalInputReplyName.val(reply.name);
 								modalInputReplyDate.val(replyService.displayTime(reply.replyDate)).attr("readonly","readonly");
 								modal.data("rno",reply.rno);
 
 								modal.find("button[id != 'modalCloseBtn']").hide();
 								
 								modalInputReply.attr("disabled", "disabled");
+								modalInputReplyName.attr("disabled", "disabled");
 
 								modalModBtn.show();
 								modalRemoveBtn.show();
 								modalInputReply.removeAttr("disabled");
-
+								
 								$("#replyModal").modal("show");
 								
 								})
@@ -317,8 +341,8 @@
 							var reply = {
 								rno : modal.data("rno"),
 								reply: modalInputReply.val(),
-								replyer : originalReplyer};							
-
+								name: modalInputReplyName.val(),
+								replyer : originalReplyer};						
 							if(!replyer){
 								alert("로그인후 수정이 가능합니다.");
 								modal.modal("hide");
@@ -368,9 +392,9 @@
 								modal.modal("hide");
 								return;
 								}
-
-							replyService.remove(rno, originalReplyer, function(result){
-
+	
+							replyService.remove(rno, replyer, function(result){								
+								
 								alert(result);
 								modal.modal("hide");
 								showList(pageNum);
@@ -396,7 +420,7 @@
 			
 		})
 
-</script>	
+</script>
 
 <%@include file="../includes/footer.jsp"%>
 </body>

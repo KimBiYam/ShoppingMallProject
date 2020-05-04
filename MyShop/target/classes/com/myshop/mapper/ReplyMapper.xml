@@ -5,8 +5,8 @@
 <mapper namespace="com.myshop.mapper.ReplyMapper">
 	<!-- 댓글 작성 -->
 	<insert id="insert">
-		insert into myshop_reply (rno, bno, reply, replyer)
-		values (myshop_reply_seq.nextval, #{bno}, #{reply}, #{replyer})
+		insert into myshop_reply (rno, bno, reply, replyer, name)
+		values (myshop_reply_seq.nextval, #{bno}, #{reply}, #{replyer}, #{name})
 	</insert>
 	<!-- 댓글 읽기 -->
 	<select id="read" resultType="com.myshop.domain.ReplyVO">
@@ -24,11 +24,11 @@
 	<!-- 댓글 리스트 -->	
 	<select id="getListWithPaging" resultType="com.myshop.domain.ReplyVO">
 	<![CDATA[
-		select rno, bno, reply, replyer, replyDate
+		select rno, bno, reply, replyer, replyDate, name
 		from
 		(
 		select /*+INDEX(myshop_reply idx_reply) */
-		rownum rn , rno, bno, reply, replyer, replyDate
+		rownum rn , rno, bno, reply, replyer, replyDate, name
 		from myshop_reply
 		where bno = #{bno}
 		and rno > 0

@@ -1,5 +1,6 @@
 package com.myshop.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,18 +17,23 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.myshop.domain.BoardVO;
 import com.myshop.domain.Criteria;
 import com.myshop.domain.PageDTO;
+import com.myshop.domain.UserVO;
 import com.myshop.service.BoardService;
+import com.myshop.service.UserService;
 
 @Controller
 @RequestMapping("/board/*")
 public class BoardController {
 	@Autowired
 	BoardService service;
+	@Autowired
+	UserService userService;
 
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
-	public void getRegister() {
-
+	public void getRegister(Model model, Principal principal) {
+		UserVO user = userService.userGet(principal.getName());
+		model.addAttribute("name", user.getUsername());
 	}
 
 	@PostMapping("/register")
@@ -49,10 +55,15 @@ public class BoardController {
 	}
 
 	@GetMapping("/get")
-	public void get(Long bno, @ModelAttribute("cri") Criteria cri, Model model) {
+	public void get(Long bno, @ModelAttribute("cri") Criteria cri, Model model, Principal principal) {
 		BoardVO board = service.get(bno);
 		service.viewcnt(bno);
 		model.addAttribute("board", board);
+		if (principal != null) {
+			model.addAttribute("name", userService.userGet(principal.getName()).getUsername());
+			//System.out.println("로그인상태");
+		}
+		
 	}
 
 	@GetMapping("/modify")
@@ -80,7 +91,7 @@ public class BoardController {
 
 	@GetMapping("/map")
 	public void getMap() {
-		
+
 	}
 
 }

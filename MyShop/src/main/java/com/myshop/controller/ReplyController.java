@@ -33,6 +33,8 @@ public class ReplyController {
 			produces = { MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo){
 		
+		//System.out.println(vo.getReplyer());
+		//System.out.println(vo.getName());
 		int insertCount = service.register(vo);
 		
 		return insertCount == 1

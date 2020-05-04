@@ -13,6 +13,7 @@ public class BoardVO {
 	private Date regDate;
 	private int replycnt;
 	private int viewcnt;
+	private String name;
 	
 
 }
