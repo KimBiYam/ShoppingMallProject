@@ -22,7 +22,7 @@
                                            	</div>
 	                                        <div class="form-group">
 	                                        	<label class="small mb-1" for="writer">작성자</label>
-	                                        	<input class="form-control py-4" name="writer" id="writer" type="text" value="${board.writer }" readonly="readonly" />
+	                                        	<input class="form-control py-4" name="writer" id="writer" type="text" value="${board.name }" readonly="readonly" />
                                         	</div>
                      						<div class="form-group">
 												<label class="small mb-1" for="content">내용</label>
