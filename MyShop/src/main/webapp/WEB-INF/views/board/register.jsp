@@ -27,10 +27,10 @@
                                             <div class="form-group mt-4 mb-0">
                            	                  <div class="form-row justify-content-center">
                                                 <div class="col-md-2">
-                                   	    	     	<button class="btn btn-outline-primary btn-block" id="btnWrite">작성</button>
+                                   	    	     	<button type="button" id="btnWrite" class="btn btn-outline-primary btn-block" data-oper='register'>작성</button>
                                             	</div>
                                    	            <div class="col-md-2">
-                                          		  	<a class="btn btn-outline-secondary btn-block" href="/myshop">리스트</a>
+                    		  						<a href="/myshop/board/list" class="btn btn-outline-secondary btn-block" data-oper='list'>리스트</a>
                                        		  	</div>
                                               </div>
                                            	</div>
@@ -52,7 +52,6 @@ $(function(){
 			}		
 		$("#boardRegister").submit();
 		})
-		
 })
 </script>
 <%@include file="../includes/footer.jsp"%>

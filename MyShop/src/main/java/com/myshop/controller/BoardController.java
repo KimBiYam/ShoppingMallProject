@@ -46,7 +46,7 @@ public class BoardController {
 	public void list(Criteria cri, Model model) {
 		List<BoardVO> list = service.getList(cri);
 		model.addAttribute("list", list);
-
+		
 		int total = service.getTotal(cri);
 		int rowNo = total - ((cri.getPageNum() - 1) * cri.getAmount());
 
