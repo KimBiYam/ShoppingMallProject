@@ -79,7 +79,6 @@
 	<script type="text/javascript">
 	$(function(){
 		var userid = '<sec:authentication property="principal.username"/>';
-		userid = userid.replace('&#95;','_');
 		$.get("/myshop/product/cart/stock",
 				{"userid" : userid},
 				function(data){

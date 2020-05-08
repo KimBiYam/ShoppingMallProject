@@ -1,12 +1,10 @@
 package com.myshop.oauth;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.javassist.bytecode.stackmap.BasicBlock.Catch;
 import org.springframework.util.StringUtils;
 
 import com.github.scribejava.core.builder.ServiceBuilder;
@@ -26,13 +24,14 @@ public class NaverLoginBO {
 	
 	private final static String CLIENT_ID = "6eEumNC3od8EZ_JW9biA";
 	private final static String CLIENT_SECRET = "RNdpVpntfw";
-	private final static String REDIRECT_URI = "http://192.168.0.73:8080/myshop/naver/login";
+	private final static String REDIRECT_URI = "http://localhost:8080/myshop/naver/login";
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 
 	/* 네이버 아이디로 인증 URL 생성 Method */
 	public String getAuthorizationUrl(HttpSession session) {
+
 		/* 세션 유효성 검증을 위하여 난수를 생성 */
 		String state = generateRandomString();
 		/* 생성한 난수 값을 session에 저장 */
