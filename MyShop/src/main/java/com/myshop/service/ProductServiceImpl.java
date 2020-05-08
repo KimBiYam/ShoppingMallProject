@@ -61,8 +61,10 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional
 	public void productDelete(int id) {
 		// TODO Auto-generated method stub
+		mapper.cartDeleteByProductid(id);
 		mapper.productDelete(id);
 	}
 

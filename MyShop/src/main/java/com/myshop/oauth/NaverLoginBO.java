@@ -1,10 +1,12 @@
 package com.myshop.oauth;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.javassist.bytecode.stackmap.BasicBlock.Catch;
 import org.springframework.util.StringUtils;
 
 import com.github.scribejava.core.builder.ServiceBuilder;
@@ -21,9 +23,10 @@ public class NaverLoginBO {
 	// redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback
 	// URL에 설정한 정보입니다.
 	// state: 애플리케이션이 생성한 상태 토큰
+	
 	private final static String CLIENT_ID = "6eEumNC3od8EZ_JW9biA";
 	private final static String CLIENT_SECRET = "RNdpVpntfw";
-	private final static String REDIRECT_URI = "http://localhost:8080/myshop/naver/login";
+	private final static String REDIRECT_URI = "http://192.168.0.73:8080/myshop/naver/login";
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
