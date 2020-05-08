@@ -48,11 +48,11 @@
 					<td>
 						<form id="amountForm" action="/myshop/product/cart/amount" method="post">
 							<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
-							<input type="hidden" id="cartid" name="cartid">
-							<input type="hidden" name="userid" value='<sec:authentication property="principal.username"/>'>
-							<select id="amount" name="amount" data-width="fit" class="selectpicker" data-size="5">
+							<input type="hidden" id="cartid" name="cartid">							
+							<input type="hidden" name="userid" id="userid" value='<sec:authentication property="principal.username"/>'>
+							<select id="amount" name="amount" id="amount" data-width="fit" class="selectpicker" data-size="5">
 							<c:forEach var="i" begin="1" end="${cartlist.stock }">
-								<option value="${i }">${i }</option>
+								<option value="${i }">${i }</option>																
 							</c:forEach>
 							</select>
 							<a href="javascript:cartAmount('${cartlist.cartid }')" class="btn btn-sm btn-outline-info">수정</a>
@@ -79,18 +79,19 @@
 	<script type="text/javascript">
 	$(function(){
 		var userid = '<sec:authentication property="principal.username"/>';
+		userid = userid.replace('&#95;','_');
 		$.get("/myshop/product/cart/stock",
 				{"userid" : userid},
 				function(data){
 					if(data == "YES"){
-						alert('                장바구니에 넣어둔 제품의 수량이 부족하여 \n                        장바구니에서 제외되었습니다');
+						alert('장바구니에 넣어둔 제품의 수량이 부족하여 \n 장바구니에서 제외되었습니다');
 						location.href = "/myshop/product/cart?userid="+userid;						
 						}
 					}
 				)
 		})
 	function cartAmount(cartid){
-			$("#cartid").val(cartid);
+			$("#cartid").val(cartid);			
 			$("#amountForm").submit();
 			alert("갯수가 수정되었습니다");
 		}	
@@ -113,4 +114,5 @@
 </body>
 
 </html>
+
 

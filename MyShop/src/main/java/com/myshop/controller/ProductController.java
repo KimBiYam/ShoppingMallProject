@@ -244,7 +244,7 @@ public class ProductController {
 //	장바구니 갯수 수정
 	@PreAuthorize("principal.username == #userid")
 	@PostMapping("/cart/amount")
-	public String cartAmount(int cartid, int amount, @ModelAttribute("userid") String userid) {
+	public String cartAmount(int cartid, int amount, @ModelAttribute("userid") String userid) {		
 		service.cartAmount(cartid, amount);
 		return "redirect:/product/cart?userid=" + userid;
 	}
@@ -377,3 +377,4 @@ public class ProductController {
 	}
 
 }
+

@@ -261,7 +261,6 @@
  						<sec:authorize access="isAuthenticated()">
 
 						replyer = '<sec:authentication property="principal.username"/>';
-						replyer = replyer.replace('&#95;','_');
 						replyName = "${name }";
 						
 						</sec:authorize>
