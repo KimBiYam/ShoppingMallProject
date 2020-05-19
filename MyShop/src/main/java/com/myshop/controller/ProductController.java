@@ -209,7 +209,7 @@ public class ProductController {
 				str = "YES";
 			}
 		}
-
+		
 		return str;
 	}
 
@@ -244,7 +244,7 @@ public class ProductController {
 //	장바구니 갯수 수정
 	@PreAuthorize("principal.username == #userid")
 	@PostMapping("/cart/amount")
-	public String cartAmount(int cartid, int amount, @ModelAttribute("userid") String userid) {
+	public String cartAmount(int cartid, int amount, @ModelAttribute("userid") String userid) {		
 		service.cartAmount(cartid, amount);
 		return "redirect:/product/cart?userid=" + userid;
 	}
@@ -278,6 +278,11 @@ public class ProductController {
 
 			ProductVO product = service.productGet(order.getProductid());
 			String fileName = product.getImgname();
+			
+			File folder = new File(uploadPath+"/"+"/order");
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
 
 			File file = new File(uploadPath + "/" + fileName);
 			File newFile = new File(uploadPath + "/order/" + fileName);
@@ -377,3 +382,4 @@ public class ProductController {
 	}
 
 }
+

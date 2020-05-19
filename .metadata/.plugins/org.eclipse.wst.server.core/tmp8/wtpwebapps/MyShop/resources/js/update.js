@@ -1,11 +1,23 @@
 $(function() {	
 //	이메일 정규식
 var regemail=/^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[.]{1}[A-Za-z]{1,5}$/;
-//	전화번호 숫자만 입력
-	$("#updateTel").on("blur keyup",function(){
-		$(this).val($(this).val().replace(/[^0-9]/gi,''));
-	})	
-//	이름 한글만 입력
+var regtel = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
+	//전화번호 자동 하이픈
+	$('#updateTel').keydown(function(event) {
+	    var key = event.charCode || event.keyCode || 0;
+	    $text = $(this);
+	    if (key !== 8 && key !== 9) {
+	        if ($text.val().length === 3) {
+	            $text.val($text.val() + '-');
+	        }
+	        if ($text.val().length === 8) {
+	            $text.val($text.val() + '-');
+	        }
+	    }
+	 
+	    return (key == 8 || key == 9 || key == 46 || (key >= 48 && key <= 57) || (key >= 96 && key <= 105));          
+	});	
+	//이름 한글만 입력
 	$("#updateUsername").on("blur keyup",function(){
 		$(this).val($(this).val().replace(/[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g,''));
 	})
@@ -53,9 +65,10 @@ var regemail=/^[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[@]{1}[-A-Za-z0-9_]+[-A-Za-z0-9_.]*[
 			$("#updatePw").focus();
 			return false;
 		}
-		if(!regemail.exec($("#updateEmail").val())){
-			alert("이메일 양식이 틀렸습니다");
-			$("#email").val("");
+		if(!regtel.exec($("#updateTel").val())){
+			alert("전화번호 양식이 틀렸습니다");
+			$("#updateTel").val("");
+			$("#updateTel").focus();
 			return false;
 		}
 		var addr = $("#updateAddrView").val() + " " + $("#updateAddrDetail").val();

@@ -113,6 +113,17 @@
 				$("#orderTel").focus();
 				return false;
 			}
+			var userid = '<sec:authentication property="principal.username"/>';
+			$.get("/myshop/product/cart/stock",
+					{"userid" : userid},
+					function(data){
+						if(data == "YES"){
+							alert('제품의 수량이 부족하여 주문이 불가능합니다');
+							return false;			
+							}
+						}
+					)
+					
 			var addr = $("#orderAddrView").val() + " " + $("#orderAddrDetail").val();
 			$("#orderAddr").val(addr);		
 			$("#orderForm").submit();

@@ -1,9 +1,0 @@
-package com.myshop.service;
-
-public interface BoardService {
-//	글쓰기
-//	상세보기
-//	수정
-//	삭제
-
-}

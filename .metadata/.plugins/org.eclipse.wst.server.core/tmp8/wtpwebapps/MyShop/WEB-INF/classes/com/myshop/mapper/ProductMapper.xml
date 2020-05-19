@@ -36,27 +36,30 @@
 		<result property="ordercode" column="order_code"/>
 		<result property="orderdate" column="order_date"/>
 		<result property="rownum" column="rn"/>
+		<result property="productid" column="product_id"/>
+		<result property="ordername" column="order_name"/>
 	</resultMap>
 	
 	
 	<!-- 카테고리 -->
 	<insert id="categoryRegister">
 		insert into myshop_category
-		values(#{categoryname})
+		values(#{categoryname},MYSHOP_CATEGORY_SEQ.nextval)
 	</insert>
 	<select id="categorylist" resultType="String">
 		select * from myshop_category
+		order by category_id desc
 	</select>
 	<delete id="categoryDelete">
 		delete from myshop_category
 		where category_name = #{categoryname}
 	</delete>
+	
+	<!-- 상품 -->
 	<insert id="productRegister">
 		insert into myshop_product values
 		(myshop_product_seq.nextval,#{name},#{price},#{stock},#{src},#{imgname},#{categoryname})
 	</insert>
-	
-	<!-- 상품 -->
 	<select id="productList" resultMap="productMap">
 		select * from myshop_product
 		<if test="value != null">
@@ -79,6 +82,10 @@
 	<delete id="productDelete">
 		delete from myshop_product
 		where product_id = #{id}
+	</delete>
+	<delete id="productDeleteByCategory">
+		delete from myshop_product
+		where category_name=#{categoryname}
 	</delete>
 	
 	
@@ -111,12 +118,16 @@
 		set amount=#{amount}
 		where cart_id=#{cartid}
 	</update>
+	<select id="cartGet" resultMap="cartMap">
+		select * from myshop_cart
+		where cart_id = #{cartid}
+	</select>
 	
 	<!-- 주문 -->
 	<insert id="order">
 		insert into myshop_order
-		values(myshop_order_seq.nextval,#{userid},#{addr},#{tel},0,
-		#{productname},	#{productprice},#{src},#{amount},#{ordercode},sysdate)
+		values(myshop_order_seq.nextval,#{userid},#{addr},#{tel},'승인안됨',
+		#{productname},	#{productprice},#{src},#{amount},#{ordercode},sysdate,#{productid},#{ordername})
 	</insert>
 	<!-- 주문시 재고 차감  -->
 	<update id="orderAmount">
@@ -126,12 +137,12 @@
 	</update>
  	<select id="orderList" resultMap="orderMap">
   		select rownum rn,order_id,order_id,user_id,order_addr,order_tel,
-  		approval,product_name,product_price,order_img_src,amount,order_code,order_date
+  		approval,product_name,product_price,order_img_src,amount,order_code,order_date,product_id,order_name
   		from (        
         select *
 		from myshop_order		
 		where rowid in (select max(rowid) from myshop_order group by order_code)
-		order by order_id desc
+		order by order_id
         )
         order by rn desc
 	</select>
@@ -141,16 +152,37 @@
 	</select>
  	<select id="orderListById" resultMap="orderMap">
   		select rownum rn,order_id,order_id,user_id,order_addr,order_tel,
-  		approval,product_name,product_price,order_img_src,amount,order_code,order_date
+  		approval,product_name,product_price,order_img_src,amount,order_code,order_date,product_id,order_name
   		from (        
         select *
 		from myshop_order
 		where user_id=#{userid}
 		and rowid in (select max(rowid) from myshop_order group by order_code)
-		order by order_id desc
+		order by order_id
         )
         order by rn desc
 	</select>	
+	<select id="orderCancel">
+		update myshop_order
+		set approval = '주문취소'
+		where order_code = #{ordercode}		
+	</select>
+	<update id="orderCancelAmount">
+		update myshop_product
+		set product_stock = product_stock + #{amount}
+		where product_id = #{productid}		
+	</update>
+	<delete id="orderDeleteById">
+		delete from myshop_order
+		where user_id = #{userid}
+	</delete>
+	<update id="orderApproval">
+		update myshop_order
+		set approval = '주문승인'
+		where order_code = #{ordercode}
+	</update>
+	
+		
 
 	
 </mapper>

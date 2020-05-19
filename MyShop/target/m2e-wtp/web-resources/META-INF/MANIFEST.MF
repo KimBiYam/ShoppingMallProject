@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
 Built-By: hot99
+<<<<<<< HEAD
 Build-Jdk: 1.8.0_231
+=======
+Build-Jdk: 1.8.0_251
+>>>>>>> 19517176c3dfe5ff07d926632207f745654e518b
 Created-By: Maven Integration for Eclipse
 

@@ -15,10 +15,11 @@
 <body>
 <jsp:include page="../includes/header.jsp"/>
   <!-- Page Content -->
-	<div class="container my-5">
+	<div class="container my-5" style="min-height: 1000px">
 		<div class="row justify-content-center">
 			<div class="col-lg-9 my-5">			
 			<div class="text-center">
+			<h1>상품 등록</h1>
 			<img id="productimg" width="300px">
 			</div>
 				<form id="registerForm" action="/myshop/product/register" method="post" enctype="multipart/form-data">
@@ -104,6 +105,19 @@
 				alert("이미지를 선택하세요");
 				return false;
 				}
+			if($("#price").val() <= 0){
+				alert("가격은 1이상의 값을 입력해주세요");
+				$("#price").val("");
+				$("#price").focus();
+				return false;
+				}
+			if($("#stock").val() < 0){
+				alert("재고는 0이상의 값을 입력해주세요");
+				$("#stock").val("");
+				$("#stock").focus();
+				return false;
+				}
+			alert("상품 등록이 완료되었습니다");
 			$("#registerForm").submit();
 			});
 		})

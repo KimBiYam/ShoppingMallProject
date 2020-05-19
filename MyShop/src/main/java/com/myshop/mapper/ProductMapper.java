@@ -27,6 +27,7 @@ public interface ProductMapper {
 	public void cartDeleteById(String userid);
 	public void cartAmount(@Param("cartid") int cartid, @Param("amount") int amount);
 	public CartVO cartGet(int cartid);
+	public void cartDeleteByProductid(int id);
 	
 	public void order(OrderVO order);
 	public void orderAmount(CartVO cart);

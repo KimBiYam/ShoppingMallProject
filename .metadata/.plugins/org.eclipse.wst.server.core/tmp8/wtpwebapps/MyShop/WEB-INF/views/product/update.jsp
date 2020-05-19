@@ -16,9 +16,10 @@
 <jsp:include page="../includes/header.jsp"/>
   <!-- Page Content -->
 	<div class="container my-5">
-		<div class="row justify-content-center">
+		<div class="row justify-content-center" style="min-height: 1000px">
 			<div class="col-lg-9 my-5">
 			<div class="text-center">
+			<h1>상품 수정</h1>
 			<img id="productimg" width="300px" src="${product.src }">
 			</div>
 				<form id="updateForm" action="/myshop/product/update" method="post" enctype="multipart/form-data">
@@ -107,6 +108,19 @@
 				$("#stock").focus();
 				return false;
 				}
+			if($("#price").val() <= 0){
+				alert("가격은 1이상의 값을 입력해주세요");
+				$("#price").val("");
+				$("#price").focus();
+				return false;
+				}
+			if($("#stock").val() < 0){
+				alert("재고는 0이상의 값을 입력해주세요");
+				$("#stock").val("");
+				$("#stock").focus();
+				return false;
+				}
+			alert("상품 정보가 성공적으로 변경되었습니다");
 			$("#updateForm").submit();
 			});
 		$("#btnDelete").on("click",function(){
@@ -115,6 +129,15 @@
 				}
 			})
 		})
+		
+		// 카테고리 체크
+		var categoryname = "${product.categoryname}";		
+		$("#categoryname option").each(function(){
+			if(categoryname == $(this).val()){
+				$(this).prop("selected",true);
+				}
+		});
+		
 	</script>
   <jsp:include page="../includes/footer.jsp"></jsp:include>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
