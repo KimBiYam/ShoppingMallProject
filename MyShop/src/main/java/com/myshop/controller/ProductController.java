@@ -278,6 +278,11 @@ public class ProductController {
 
 			ProductVO product = service.productGet(order.getProductid());
 			String fileName = product.getImgname();
+			
+			File folder = new File(uploadPath+"/"+"/order");
+			if(!folder.exists()) {
+				folder.mkdir();
+			}
 
 			File file = new File(uploadPath + "/" + fileName);
 			File newFile = new File(uploadPath + "/order/" + fileName);
