@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context allowCasualMultipartParsing="true" docBase="E:\Hot\Spring\ShoppingMallProject\.metadata\.plugins\org.eclipse.wst.server.core\tmp8\wtpwebapps\MyShop" path="/myshop" reloadable="true" source="org.eclipse.jst.jee.server:MyShop">
+<Context allowCasualMultipartParsing="true" docBase="E:\programming\Spring\ShoppingMallProject\.metadata\.plugins\org.eclipse.wst.server.core\tmp8\wtpwebapps\MyShop" path="/myshop" reloadable="true" source="org.eclipse.jst.jee.server:MyShop">
 
     <!-- Default set of monitored resources. If one of these changes, the    -->
     <!-- web application will be reloaded.                                   -->
